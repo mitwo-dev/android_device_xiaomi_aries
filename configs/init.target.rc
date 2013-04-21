@@ -1,0 +1,192 @@
+# Copyright (c) 2012, Code Aurora Forum. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above
+#       copyright notice, this list of conditions and the following
+#       disclaimer in the documentation and/or other materials provided
+#       with the distribution.
+#     * Neither the name of Code Aurora Forum, Inc. nor the names of its
+#       contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+# IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+#
+
+on early-init
+    mkdir /firmware 0771 system system
+    symlink /data/tombstones /tombstones
+
+on emmc-fs
+    # Keeping following partitions outside fstab file. As user may not have
+    # these partition flashed on the device. Failure to mount any partition in fstab file
+    # results in failure to launch late-start class.
+
+#    mount ext4 /dev/block/mmcblk0p23 /system wait ro barrier=1
+#    mount ext4 /dev/block/mmcblk0p26 /data relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
+#    mount ext4 /dev/block/mmcblk0p27 /storage_int
+#    mount ext4 /dev/block/mmcblk0p25 /cache relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
+#    mount ext4 /dev/block/mmcblk0p22 /persist relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc    
+
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system wait rw barrier=1 noatime nodiratime
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/userdata /data relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/cache /cache relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
+
+    wait /dev/block/platform/msm_sdcc.1/by-name/modem
+    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower dmask=177 fmask=177
+
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/storage /storage_int
+#    wait /dev/block/platform/msm_sdcc.1/by-name/storage
+#    exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/storage /storage_int
+    chmod 0775 /storage_int
+    chown media_rw media_rw /storage_int
+    mkdir /storage_int/ramdump 0775
+    chown media_rw media_rw /storage_int/ramdump
+
+on boot
+   write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
+   write /sys/devices/i2c-3/3-005b/update_fw 1
+   exec /system/bin/init.atmel.fw_update.sh
+
+on post-fs-data
+   mkdir /data/tombstones 0771 system system
+   mkdir /tombstones/modem 0771 system system
+   mkdir /tombstones/lpass 0771 system system
+   mkdir /tombstones/wcnss 0771 system system
+   mkdir /tombstones/dsps 0771 system system
+
+#start camera server as daemon
+service qcamerasvr /system/bin/mm-qcamera-daemon
+        class late_start
+        user camera
+        group camera system inet input graphics
+
+#start GNSS/Sensor interface daemon
+service gsiff_daemon /system/bin/gsiff_daemon
+    class late_start
+    user system
+    group gps qcom_oncrpc net_raw
+
+service thermald /system/bin/thermald
+   class main
+   user root
+   group root
+
+service mpdecision /system/bin/mpdecision --avg_comp
+   user root
+   disabled
+
+service ramdump_riva /system/bin/logwrapper /system/bin/ramdump riva /dev/ramdump_riva /storage_int/ramdump/riva_ramdump.bin
+   class late_start
+   user root
+
+service ramdump_dsps /system/bin/logwrapper /system/bin/ramdump dsps /dev/ramdump_dsps /storage_int/ramdump/dsps_ramdump.bin
+   class late_start
+   user root
+
+service ramdump_dsps2 /system/bin/logwrapper /system/bin/ramdump dsps2 /dev/ramdump_smem-dsps /storage_int/ramdump/dsps2_ramdump.bin
+   class late_start
+   user root
+
+service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml
+   user system
+   group system
+   disabled
+
+service kickstart /system/bin/qcks -i /firmware/image/
+    oneshot
+    disabled
+
+service mdm_helper /system/bin/mdm_helper
+    class main
+    onrestart setprop ro.service.mdm_helper_restarted "true"
+    disabled
+
+service qrngd /system/bin/qrngd -f
+   class main
+   user root
+   group root
+
+service qseecomd /system/bin/qseecomd
+   class late_start
+   user system
+   group system
+
+# Start kickstart if mdm is detected
+on property:ro.baseband=mdm
+    mkdir /data/qcks 0770 system system
+    start kickstart
+
+# Start up mdm_helper if sglte detected
+on property:ro.baseband=sglte
+    mkdir /data/misc/mdmhelperdata 0700
+    start mdm_helper
+
+on property:persist.sys.aries.power_profile=high
+#    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 0
+    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 85
+    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 0
+    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 80000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1512000
+    write /sys/class/leds/lcd-backlight/max_brightness 255
+    write /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/max_gpuclk 400000000
+    stop mpdecision
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1512000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1512000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1512000
+
+on property:persist.sys.aries.power_profile=middle
+#    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 100000
+    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 95
+    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 350000
+    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1512000
+    write /sys/class/leds/lcd-backlight/max_brightness 255
+    write /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/max_gpuclk 400000000
+    start mpdecision
+
+on property:persist.sys.aries.power_profile=low
+#    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 100000
+    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 95
+    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 350000
+    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 20000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 918000
+    write /sys/class/leds/lcd-backlight/max_brightness 70
+    write /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/max_gpuclk 200000000
+    start mpdecision
+
+on property:persist.sys.display_prefer=1
+    write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 1
+
+on property:persist.sys.display_prefer=2
+    write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 2
+
+on property:persist.sys.display_prefer=3
+    write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 3
+
+on property:persist.sys.display_ce=10
+    write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 240
+
+on property:persist.sys.display_ce=11
+    write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 16
