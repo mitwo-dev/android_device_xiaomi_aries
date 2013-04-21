@@ -163,6 +163,7 @@
 /system/lib/libril.so
 /system/lib/libsensor1.so
 /system/lib/libsensor_reg.so
+/system/lib/libsensor_test.so
 /system/lib/libsensor_user_cal.so
 /system/lib/libxml.so
 /system/lib/lib_dlb_msd.so
