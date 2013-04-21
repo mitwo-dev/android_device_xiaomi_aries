@@ -26,6 +26,7 @@
 #
 
 import init.aries.usb.rc
+import init.aries.syspart_${ro.boot.syspart}.rc
 import init.target.rc
 
 on init

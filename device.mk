@@ -72,7 +72,9 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
     device/xiaomi/aries/configs/media_profiles.xml:system/etc/media_profiles.xml \
     device/xiaomi/aries/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    device/xiaomi/aries/configs/init.target.rc:root/init.target.rc
+    device/xiaomi/aries/configs/init.target.rc:root/init.target.rc \
+    device/xiaomi/aries/configs/init.aries.syspart_system.rc:root/init.aries.syspart_system.rc \
+    device/xiaomi/aries/configs/init.aries.syspart_system1.rc:root/init.aries.syspart_system1.rc
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
@@ -235,6 +237,9 @@ PRODUCT_PACKAGES += send_bug
 PRODUCT_COPY_FILES += \
     system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
     system/extras/bugmailer/send_bug:system/bin/send_bug
+
+PRODUCT_COPY_FILES += \
+    device/xiaomi/aries/mount_ext4.sh:system/bin/mount_ext4.sh
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
