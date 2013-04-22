@@ -44,7 +44,7 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
 
 # Try to build the kernel
 TARGET_KERNEL_SOURCE := kernel/xiaomi/aries
-TARGET_KERNEL_CONFIG := msm8960-perf_defconfig
+TARGET_KERNEL_CONFIG := aries-perf-usr_defconfig
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
