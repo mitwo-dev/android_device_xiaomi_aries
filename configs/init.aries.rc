@@ -631,7 +631,7 @@ service profiler_daemon /system/bin/profiler_daemon
     group root
     disabled
 
-service sdcard /system/bin/sdcard /storage_int 1023 1023
+service sdcard /system/bin/sdcard /storage_int /storage/sdcard0 1023 1023
     class late_start
     disabled
 
