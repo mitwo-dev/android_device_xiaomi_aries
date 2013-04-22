@@ -42,17 +42,17 @@ on emmc-fs
 #    mount ext4 /dev/block/mmcblk0p25 /cache relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
 #    mount ext4 /dev/block/mmcblk0p22 /persist relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc    
 
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system wait rw barrier=1 noatime nodiratime
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/userdata /data relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/cache /cache relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
+    wait /dev/block/platform/msm_sdcc.1/by-name/userdata
+    exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/userdata /data
 
-    wait /dev/block/platform/msm_sdcc.1/by-name/modem
-    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower dmask=177 fmask=177
+    wait /dev/block/platform/msm_sdcc.1/by-name/cache
+    exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/cache /cache
 
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/storage /storage_int
-#    wait /dev/block/platform/msm_sdcc.1/by-name/storage
-#    exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/storage /storage_int
+    wait /dev/block/platform/msm_sdcc.1/by-name/persist
+    exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/persist /persist
+
+    wait /dev/block/platform/msm_sdcc.1/by-name/storage
+    exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/storage /storage_int
     chmod 0775 /storage_int
     chown media_rw media_rw /storage_int
     mkdir /storage_int/ramdump 0775
