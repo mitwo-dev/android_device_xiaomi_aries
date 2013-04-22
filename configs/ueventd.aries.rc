@@ -26,7 +26,7 @@
 #
 
 # the DIAG device node is not world writable/readable.
-/dev/diag                 0660   system     qcom_diag
+#/dev/diag                 0660   system     qcom_diag
 
 /dev/genlock              0666   system     system
 /dev/kgsl                 0666   system     system
@@ -98,3 +98,18 @@
 /dev/ttyGS0               0660   system     system
 /dev/i2c-5                0660   media       media
 /dev/hw_random            0640   root       system
+
+# try to fix some
+/dev/qseecom              0666   system     drmrpc
+/dev/diag                 0666   root       root
+/dev/ramdump_dsps         0600   system     system
+/dev/ramdump_lpass         0600   system     system
+/dev/ramdump_riva         0600   system     system
+/dev/ramdump_smem-dsps         0600   system     system
+/dev/audience_es310         0660   system     audio
+/dev/efs_bridge         0600   system     system
+/dev/msm_acdb         0660   system     audio
+/dev/msm_rtac         0660   system     audio
+/dev/smd_cxm_qmi         0660   radio     radio
+/dev/sysmatdrv         0660   system     system
+/dev/ttyHS2         0660   system     audio
