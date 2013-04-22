@@ -74,7 +74,8 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/media_codecs.xml:system/etc/media_codecs.xml \
     device/xiaomi/aries/configs/init.target.rc:root/init.target.rc \
     device/xiaomi/aries/configs/init.aries.syspart_system.rc:root/init.aries.syspart_system.rc \
-    device/xiaomi/aries/configs/init.aries.syspart_system1.rc:root/init.aries.syspart_system1.rc
+    device/xiaomi/aries/configs/init.aries.syspart_system1.rc:root/init.aries.syspart_system1.rc \
+    device/xiaomi/aries/configs/init.qcom.sh:root/init.qcom.sh
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
