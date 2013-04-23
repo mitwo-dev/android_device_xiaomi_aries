@@ -82,10 +82,10 @@ service gsiff_daemon /system/bin/gsiff_daemon
     user system
     group gps qcom_oncrpc net_raw
 
-service thermald /system/bin/thermald
-   class main
-   user root
-   group root
+service thermald /system/bin/thermald -c /system/etc/thermald.conf
+     class main
+    socket thermald stream 0666 root root
+    user root
 
 service mpdecision /system/bin/mpdecision --avg_comp
    user root
