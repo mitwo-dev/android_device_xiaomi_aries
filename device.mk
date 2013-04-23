@@ -75,7 +75,6 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/init.qcom.sh:root/init.qcom.sh
 
 PRODUCT_COPY_FILES += \
-    device/xiaomi/aries/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
     device/xiaomi/aries/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
     device/xiaomi/aries/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
     device/xiaomi/aries/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
