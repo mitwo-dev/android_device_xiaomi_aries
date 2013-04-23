@@ -123,8 +123,6 @@ service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml
    disabled
 
 service kickstart /system/bin/qcks -i /firmware/image/
-    user system
-    group system sdcard_rw media_rw
     oneshot
     disabled
 
