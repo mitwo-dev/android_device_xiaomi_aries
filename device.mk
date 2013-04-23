@@ -81,7 +81,6 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
     device/xiaomi/aries/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
     device/xiaomi/aries/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
-    device/xiaomi/aries/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
     device/xiaomi/aries/init.xiaomi.aries.wifi.sh:system/etc/init.xiaomi.aries.wifi.sh
 
 # Prebuilt kl and kcm keymaps
