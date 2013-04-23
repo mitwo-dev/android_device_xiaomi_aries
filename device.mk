@@ -28,9 +28,6 @@ DEVICE_PACKAGE_OVERLAYS := device/xiaomi/aries/overlay
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-#PRODUCT_PACKAGES += \
-#    charger_res_images \
-#    charger
 
 # Charger
 PRODUCT_COPY_FILES += \
@@ -171,8 +168,7 @@ PRODUCT_PACKAGES += \
     liboverlay \
     hwcomposer.msm8960 \
     gralloc.msm8960 \
-    copybit.msm8960 \
-#    lights.msm8960
+    copybit.msm8960
 
 PRODUCT_PACKAGES += \
     alsa.msm8960 \
@@ -202,9 +198,6 @@ PRODUCT_PACKAGES += \
     bdAddrLoader \
     libwfcu \
     conn_init
-
-PRODUCT_PACKAGES += \
-    keystore.msm8960
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-qmi-1.so

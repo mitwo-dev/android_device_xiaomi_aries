@@ -42,7 +42,7 @@ BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=aries ehc
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
 #TARGET_PREBUILT_KERNEL := device/xiaomi/aries/kernel
 
-# Try to build the kernel
+# Kernel
 TARGET_KERNEL_SOURCE := kernel/xiaomi/aries
 TARGET_KERNEL_CONFIG := aries-perf-usr_defconfig
 
@@ -72,9 +72,6 @@ WIFI_DRIVER_MODULE_NAME          := "wlan"
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_AP           := "ap"
 
-# Lights
-#TARGET_PROVIDES_LIBLIGHT := true
-
 BOARD_EGL_CFG := device/xiaomi/aries/configs/egl.cfg
 
 #Display
@@ -103,9 +100,6 @@ BOARD_WANTS_EMMC_BOOT := true
 
 BOARD_USES_SECURE_SERVICES := true
 
-BOARD_USES_EXTRA_THERMAL_SENSOR := true
-BOARD_USES_CAMERA_FAST_AUTOFOCUS := true
-
 BOARD_LIB_DUMPSTATE := libdumpstate.aries
 
 # GPS
@@ -122,7 +116,7 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/xiaomi/aries
 
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
-#Audio
+# Audio
 BOARD_USES_ALSA_AUDIO:= true
 TARGET_QCOM_AUDIO_VARIANT := caf
 TARGET_USES_QCOM_MM_AUDIO := true
