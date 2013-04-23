@@ -1,4 +1,4 @@
-# Copyright (c) 2012, Code Aurora Forum. All rights reserved.
+# Copyright (c) 2012, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -9,7 +9,7 @@
 #       copyright notice, this list of conditions and the following
 #       disclaimer in the documentation and/or other materials provided
 #       with the distribution.
-#     * Neither the name of Code Aurora Forum, Inc. nor the names of its
+#     * Neither the name of The Linux Foundation nor the names of its
 #       contributors may be used to endorse or promote products derived
 #       from this software without specific prior written permission.
 #
@@ -53,10 +53,21 @@ on emmc-fs
 
     wait /dev/block/platform/msm_sdcc.1/by-name/storage
     exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/storage /storage_int
+
+    mkdir /persist/property
+    chmod 0775 /persist/property
+
     chmod 0775 /storage_int
     chown media_rw media_rw /storage_int
     mkdir /storage_int/ramdump 0775
     chown media_rw media_rw /storage_int/ramdump
+    mkdir /storage_int/ramdump/mdm 0775
+    chown media_rw media_rw /storage_int/ramdump/mdm
+
+    chown system system /dev/ramdump_dsps
+    chown system system /dev/ramdump_lpass
+    chown system system /dev/ramdump_riva
+    chown system system /dev/ramdump_smem-dsps
 
 on boot
    write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
@@ -93,15 +104,18 @@ service mpdecision /system/bin/mpdecision --avg_comp
 
 service ramdump_riva /system/bin/logwrapper /system/bin/ramdump riva /dev/ramdump_riva /storage_int/ramdump/riva_ramdump.bin
    class late_start
-   user root
+   user system
+   group system media_rw
 
 service ramdump_dsps /system/bin/logwrapper /system/bin/ramdump dsps /dev/ramdump_dsps /storage_int/ramdump/dsps_ramdump.bin
    class late_start
-   user root
+   user system
+   group system media_rw
 
 service ramdump_dsps2 /system/bin/logwrapper /system/bin/ramdump dsps2 /dev/ramdump_smem-dsps /storage_int/ramdump/dsps2_ramdump.bin
    class late_start
-   user root
+   user system
+   group system media_rw
 
 service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml
    user system
@@ -109,6 +123,8 @@ service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml
    disabled
 
 service kickstart /system/bin/qcks -i /firmware/image/
+    user system
+    group system sdcard_rw media_rw
     oneshot
     disabled
 
@@ -143,16 +159,16 @@ on property:persist.sys.aries.power_profile=high
     write /sys/devices/system/cpu/cpufreq/interactive/max_boost 0
     write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 80000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1512000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2000000
     write /sys/class/leds/lcd-backlight/max_brightness 255
     write /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/max_gpuclk 400000000
     stop mpdecision
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1512000
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1512000
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1512000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 2000000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 2000000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 2000000
 
 on property:persist.sys.aries.power_profile=middle
 #    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 100000
@@ -160,7 +176,7 @@ on property:persist.sys.aries.power_profile=middle
     write /sys/devices/system/cpu/cpufreq/interactive/max_boost 350000
     write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1512000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2000000
     write /sys/class/leds/lcd-backlight/max_brightness 255
     write /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/max_gpuclk 400000000
     start mpdecision

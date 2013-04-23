@@ -72,7 +72,8 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/init.target.rc:root/init.target.rc \
     device/xiaomi/aries/configs/init.aries.syspart_system.rc:root/init.aries.syspart_system.rc \
     device/xiaomi/aries/configs/init.aries.syspart_system1.rc:root/init.aries.syspart_system1.rc \
-    device/xiaomi/aries/configs/init.qcom.sh:root/init.qcom.sh
+    device/xiaomi/aries/configs/init.qcom.sh:root/init.qcom.sh \
+    device/xiaomi/aries/configs/init.qcom.usb.sh:root/init.qcom.usb.sh
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
