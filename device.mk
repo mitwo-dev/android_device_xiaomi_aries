@@ -96,6 +96,25 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/sensor00fn1a.kl:system/usr/keylayout/sensor00fn1a.kl \
     device/xiaomi/aries/ue_rf4ce_remote.kl:system/usr/keylayout/ue_rf4ce_remote.kl
 
+# Prebuilt modules
+PRODUCT_COPY_FILES += \
+    device/xiaomi/aries/prebuild/modules/bluetooth-power.ko:system/lib/modules/bluetooth-power.ko \
+    device/xiaomi/aries/prebuild/modules/dma_test.ko:system/lib/modules/dma_test.ko \
+    device/xiaomi/aries/prebuild/modules/eeprom_93cx6.ko:system/lib/modules/eeprom_93cx6.ko \
+    device/xiaomi/aries/prebuild/modules/evbug.ko:system/lib/modules/evbug.ko \
+    device/xiaomi/aries/prebuild/modules/gspca_main.ko:system/lib/modules/gspca_main.ko \
+    device/xiaomi/aries/prebuild/modules/ks8851.ko:system/lib/modules/ks8851.ko \
+    device/xiaomi/aries/prebuild/modules/lcd.ko:system/lib/modules/lcd.ko \
+    device/xiaomi/aries/prebuild/modules/mmc_block_test.ko:system/lib/modules/mmc_block_test.ko \
+    device/xiaomi/aries/prebuild/modules/mmc_test.ko:system/lib/modules/mmc_test.ko \
+    device/xiaomi/aries/prebuild/modules/msm-buspm-dev.ko:system/lib/modules/msm-buspm-dev.ko \
+    device/xiaomi/aries/prebuild/modules/radio-iris-transport.ko:system/lib/modules/radio-iris-transport.ko \
+    device/xiaomi/aries/prebuild/modules/reset_modem.ko:system/lib/modules/reset_modem.ko \
+    device/xiaomi/aries/prebuild/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
+    device/xiaomi/aries/prebuild/modules/spidev.ko:system/lib/modules/spidev.ko \
+    device/xiaomi/aries/prebuild/modules/test-iosched.ko:system/lib/modules/test-iosched.ko \
+    device/xiaomi/aries/prebuild/modules/wlan.ko:system/lib/modules/wlan.ko
+
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
