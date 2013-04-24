@@ -125,11 +125,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320
 
 # Audio Configuration
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    persist.audio.handset.mic=dmic \
-#    persist.audio.fluence.mode=endfire \
-#    persist.audio.lowlatency.rec=false \
-#    af.resampler.quality=4
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.audio.fluence.mode=endfire \
+    persist.audio.vr.enable=false \
+    persist.audio.handset.mic=digital \
+    af.resampler.quality=255 \
+    mpq.audio.decode=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.aries.power_profile=middle
 
 # Do not power down SIM card when modem is sent to Low Power Mode.
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -214,7 +218,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # fuse sdcard
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.fuse_sdcard=true
+    persist.fuse_sdcard=true \
+    ro.hwui.text_cache_width=2048 \
+    ro.hwui.texture_cache_size=48
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
@@ -223,7 +229,18 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     service.adb.enable=1 \
     persist.service.adb.enable=1
+
+# Gps
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.gps.qmienabled=true
     
+# save modem ramdump to sdcard
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.radio.parsedump=1 \
+    persist.radio.ramdump_sdcard=0 \
+    persist.radio.ramdump_num=3
+
+
 # for bugmailer
 PRODUCT_PACKAGES += send_bug
 PRODUCT_COPY_FILES += \
