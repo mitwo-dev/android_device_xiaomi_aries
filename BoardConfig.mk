@@ -84,7 +84,6 @@ TARGET_USES_ION := true
 TARGET_USES_C2D_COMPOSITION := true
 
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-TARGET_RECOVERY_UI_LIB := librecovery_ui_aries
 BOARD_CUSTOM_GRAPHICS := ../../../device/xiaomi/aries/recovery/graphics_en.c
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/xiaomi/aries/recovery/recovery_keys.c
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
