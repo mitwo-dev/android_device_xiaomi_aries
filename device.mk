@@ -125,19 +125,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320
 
 # Audio Configuration
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.audio.handset.mic=dmic \
-    persist.audio.fluence.mode=endfire \
-    persist.audio.lowlatency.rec=false \
-    af.resampler.quality=4
-
-# Debugging
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.secure=0 \
-    service.adb.enable=1 \
-    sys.usb.config=adb \
-    ro.debuggable=1 \
-    persist.service.adb.enable=1
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    persist.audio.handset.mic=dmic \
+#    persist.audio.fluence.mode=endfire \
+#    persist.audio.lowlatency.rec=false \
+#    af.resampler.quality=4
 
 # Do not power down SIM card when modem is sent to Low Power Mode.
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -167,7 +159,8 @@ PRODUCT_PACKAGES += \
     liboverlay \
     hwcomposer.msm8960 \
     gralloc.msm8960 \
-    copybit.msm8960
+    copybit.msm8960 \
+    lights.msm8960
 
 PRODUCT_PACKAGES += \
     alsa.msm8960 \
@@ -194,9 +187,7 @@ PRODUCT_PACKAGES += \
     libc2dcolorconvert
 
 PRODUCT_PACKAGES += \
-    bdAddrLoader \
-    libwfcu \
-    conn_init
+    libwfcu
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-qmi-1.so
@@ -226,9 +217,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.fuse_sdcard=true
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp \
-    ro.adb.secure=0
+    persist.sys.usb.config=mtp
 
+# Debugging
+PRODUCT_PROPERTY_OVERRIDES += \
+    service.adb.enable=1 \
+    persist.service.adb.enable=1
+    
 # for bugmailer
 PRODUCT_PACKAGES += send_bug
 PRODUCT_COPY_FILES += \
