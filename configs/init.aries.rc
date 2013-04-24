@@ -161,7 +161,6 @@ on boot
     # Otherwise, a weird issue happens in which some long
     # connections on high-throughput links get dropped when
     # an ack packet comes out of order
-    write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
     setprop ro.fuse_sdcard ${persist.fuse_sdcard}
 
     chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
@@ -178,7 +177,6 @@ on boot
     chown system system /sys/class/leds/led:green/brightness
     chown system system /sys/class/leds/led:blue/brightness
     chown system system /sys/class/timed_output/vibrator/pattern
-    chmod 0444 /proc/cmdline
 
     chown system system /sys/devices/system/cpu/cpu0/online
     chmod 0664 /sys/devices/system/cpu/cpu0/online
@@ -192,7 +190,7 @@ on boot
 
 # import cne init file
 on post-fs
-    export_rc /persist/init.cne.rc
+    import /persist/init.cne.rc
     start xiaomi-wifi
 
 # msm specific files that need to be created on /data
@@ -207,6 +205,9 @@ on post-fs-data
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     # to observe dnsmasq.leases file for dhcp information of soft ap.
     chown dhcp system /data/misc/dhcp
+
+    write /dev/wcnss_wlan 1
+    write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 1
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
@@ -228,7 +229,7 @@ on post-fs-data
 
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
-    symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
+    #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 
     #Create directories for wiper services
     mkdir /data/wpstiles/ 0755 shell
@@ -270,6 +271,7 @@ on post-fs-data
     mkdir /data/camera 0771 root camera
 
     setprop vold.post_fs_data_done 1
+    chown system /dev/block/platform/msm_sdcc.1/by-name
 
     # Change owner for ks
     chown system system /data/qcks/acdb.bin
@@ -277,6 +279,10 @@ on post-fs-data
     chown system system /data/qcks/efs2.bin
     chown system system /data/qcks/efs3.bin
     chown system system /data/qcks/temp.dump
+
+    # communicate with mpdecision
+    mkdir /dev/socket/mpdecision 0770 system system
+    chmod 2770 /dev/socket/mpdecision
 
 on charger
 #    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system wait ro barrier=1
@@ -300,6 +306,8 @@ on charger
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_setspeed 192000
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
+    setprop sys.usb.config adb
+    class_start charger
     
 on property:init.svc.surfaceflinger=stopped
     stop ppd
@@ -331,9 +339,8 @@ service cnd /system/bin/cnd
     socket cnd stream 666 root radio
 
 service rmt_storage /system/bin/rmt_storage
-    class core
+    class main
     user root
-    disabled
 
 on property:ro.boot.emmc=true
     start rmt_storage
@@ -346,7 +353,7 @@ service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start
     user bluetooth
-    group qcom_oncrpc bluetooth net_bt_admin
+    group qcom_oncrpc bluetooth net_bt_admin system
     disabled
     oneshot
 
@@ -365,16 +372,9 @@ service bt-sap /system/bin/sapd 15
     oneshot
 
 service bridgemgrd /system/bin/bridgemgrd
-    class late_start
+    class main
     user radio
-    group radio qcom_diag
-    disabled
-
-service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0
-    class late_start
-    user system
-    group system inet
-    disabled
+    group radio
 
 service qmiproxy /system/bin/qmiproxy
     class main
@@ -396,41 +396,6 @@ service sensors /system/bin/sensors.qcom
     class late_start
     user root
     group root
-    disabled
-
-on property:ro.use_data_netmgrd=false
-    # netmgr not supported on specific target
-    stop netmgrd
-
-# Adjust socket buffer to enlarge TCP receive window for high bandwidth
-# but only if ro.data.large_tcp_window_size property is set.
-on property:ro.data.large_tcp_window_size=true
-    write /proc/sys/net/ipv4/tcp_adv_win_scale  1
-
-service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin inet net_admin net_raw
-    disabled
-    oneshot
-
-service amp_init /system/bin/amploader -i
-    class late_start
-    user root
-    disabled
-    oneshot
-
-service amp_load /system/bin/amploader -l 7000
-    class late_start
-    user root
-    disabled
-    oneshot
-
-service amp_unload /system/bin/amploader -u
-    class late_start
-    user root
-    disabled
-    oneshot
 
 service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -N \
@@ -457,23 +422,23 @@ service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service dhcpcd_wlan0 /system/bin/dhcpcd -ABKLG
-    class late_start
+service dhcpcd_wlan0 /system/bin/dhcpcd -aABDKL
+    class main
     disabled
     oneshot
 
-service dhcpcd_p2p /system/bin/dhcpcd -ABKLG
-    class late_start
+service dhcpcd_p2p /system/bin/dhcpcd -aABKL
+    class main
     disabled
     oneshot
 
 service iprenew_wlan0 /system/bin/dhcpcd -n
-    class late_start
+    class main
     disabled
     oneshot
 
 service iprenew_p2p /system/bin/dhcpcd -n
-    class late_start
+    class main
     disabled
     oneshot
 
