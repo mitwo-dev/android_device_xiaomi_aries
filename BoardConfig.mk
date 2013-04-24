@@ -40,7 +40,7 @@ BOARD_KERNEL_BASE := 0x80200000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=aries ehci-hcd.park=3 maxcpus=2
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
-#TARGET_PREBUILT_KERNEL := device/xiaomi/aries/kernel
+TARGET_PREBUILT_KERNEL := device/xiaomi/aries/kernel
 
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/xiaomi/aries
@@ -85,7 +85,6 @@ TARGET_RECOVERY_UI_LIB := librecovery_ui_aries
 BOARD_CUSTOM_GRAPHICS := ../../../device/xiaomi/aries/recovery/graphics_en.c
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/xiaomi/aries/recovery/recovery_keys.c
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
-#BOARD_USE_CUSTOM_RECOVERY_FONT := \"font_16x30.h\"
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 23068672 # 22M
@@ -114,15 +113,15 @@ COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/xiaomi/aries
 
-BOARD_CHARGER_ENABLE_SUSPEND := true
+#BOARD_CHARGER_ENABLE_SUSPEND := true
 
 # Audio
 BOARD_USES_ALSA_AUDIO:= true
 TARGET_QCOM_AUDIO_VARIANT := caf
 TARGET_USES_QCOM_MM_AUDIO := true
-BOARD_AUDIO_CAF_LEGACY_INPUT_BUFFERSIZE := true
+#BOARD_AUDIO_CAF_LEGACY_INPUT_BUFFERSIZE := true
 
-BOARD_HAVE_LOW_LATENCY_AUDIO := true
+#BOARD_HAVE_LOW_LATENCY_AUDIO := true
 
 -include vendor/xiaomi/aries/BoardConfigVendor.mk
 
