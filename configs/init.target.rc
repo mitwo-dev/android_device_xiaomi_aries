@@ -98,9 +98,8 @@ service thermald /system/bin/thermald -c /system/etc/thermald.conf
     socket thermald stream 0666 root root
     user root
 
-service mpdecision /system/bin/mpdecision --avg_comp
-   user root
-   disabled
+service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
+    class main
 
 service ramdump_riva /system/bin/logwrapper /system/bin/ramdump riva /dev/ramdump_riva /storage_int/ramdump/riva_ramdump.bin
    class late_start

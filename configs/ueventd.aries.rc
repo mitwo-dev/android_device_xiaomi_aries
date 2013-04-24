@@ -43,6 +43,7 @@
 /dev/msm_vidc_dec         0660   system     audio
 /dev/msm_vidc_dec_sec     0660   system     audio
 /dev/msm_vidc_enc         0660   system     audio
+/dev/msm_vidc_enc_sec     0660   system     audio
 /dev/msm_rotator          0664   system     system
 /dev/hw_random            0660   system     system
 
@@ -80,6 +81,7 @@
 /dev/audience_es310       0660   system     audio
 /dev/efs_bridge           0600   system     system
 /dev/msm_qcelp_in         0660   system     audio
+/dev/msm_amrwb_in         0660   system     audio
 /dev/msm_evrc_in          0660   system     audio
 /dev/msm_preproc_ctl      0660   system     audio
 /dev/msm_qcelp            0660   system     audio
@@ -104,6 +106,6 @@
 /dev/block/mmcblk0p13     0600   system     system
 /dev/block/mmcblk0p16     0600   system     system
 /dev/block/mmcblk0p14     0600   system     system
-
+/dev/msm_dsps             0600   system     system
 /dev/ks_bridge            0600   system     system
 /dev/efs_bridge           0600   system     system
