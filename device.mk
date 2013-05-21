@@ -28,6 +28,10 @@ DEVICE_PACKAGE_OVERLAYS := device/xiaomi/aries/overlay
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
+LOCAL_KERNEL := device/xiaomi/aries/kernel
+
+PRODUCT_COPY_FILES := \
+	$(LOCAL_KERNEL):kernel
 
 # Charger
 PRODUCT_COPY_FILES += \
@@ -82,6 +86,9 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
     device/xiaomi/aries/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
     device/xiaomi/aries/init.xiaomi.aries.wifi.sh:system/etc/init.xiaomi.aries.wifi.sh
+
+PRODUCT_COPY_FILES += \
+    device/xiaomi/aries/bootanimation.zip:system/media/bootanimation.zip
 
 # Prebuilt kl and kcm keymaps
 PRODUCT_COPY_FILES += \
