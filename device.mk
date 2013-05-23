@@ -77,7 +77,8 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/init.aries.syspart_system.rc:root/init.aries.syspart_system.rc \
     device/xiaomi/aries/configs/init.aries.syspart_system1.rc:root/init.aries.syspart_system1.rc \
     device/xiaomi/aries/configs/init.qcom.sh:root/init.qcom.sh \
-    device/xiaomi/aries/configs/init.qcom.usb.sh:root/init.qcom.usb.sh
+    device/xiaomi/aries/configs/init.qcom.usb.sh:root/init.qcom.usb.sh \
+    device/xiaomi/aries/configs/init:root/init
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
@@ -132,15 +133,22 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320
 
 # Audio Configuration
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.audio.fluence.mode=endfire \
-    persist.audio.vr.enable=false \
-    persist.audio.handset.mic=digital \
-    af.resampler.quality=255 \
-    mpq.audio.decode=true
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    persist.audio.fluence.mode=endfire \
+#    persist.audio.vr.enable=false \
+#    persist.audio.handset.mic=digital \
+#    af.resampler.quality=255 \
+#    mpq.audio.decode=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.aries.power_profile=middle
+
+# Audio Configuration
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.audio.handset.mic=dmic \
+	persist.audio.fluence.mode=endfire \
+	persist.audio.lowlatency.rec=false \
+	af.resampler.quality=4
 
 # Do not power down SIM card when modem is sent to Low Power Mode.
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -187,6 +195,12 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=smd
+
+PRODUCT_PACKAGES += \
+	camera.aries \
+	camera.msm8960 \
+	libmmcamera_interface2 \
+	libmmcamera_interface
 
 PRODUCT_PACKAGES += \
     libmm-omxcore \

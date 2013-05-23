@@ -18,7 +18,10 @@
 #define DEVICE_PERMS_H
 
 #define PROPERTY_PERMS_APPEND \
-    { "camera.",          AID_MEDIA,    0 },
-
+    { "camera.",          AID_MEDIA,    0 }, \
+    { "permanent.radio.", AID_RADIO,    0 }, \
+    { "dolby.audio",      AID_MEDIA,    0 }, \
+    { "dolby.dm.",        AID_SYSTEM,   0 }, \
+    { "persist.camera.",  AID_MEDIA,    0 }, 
 #endif /* DEVICE_PERMS_H */
 
