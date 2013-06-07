@@ -54,10 +54,7 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
 
 PRODUCT_COPY_FILES += \
-    device/xiaomi/aries/configs/snd_soc_msm:system/etc/snd_soc_msm/snd_soc_msm \
-    device/xiaomi/aries/configs/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
     device/xiaomi/aries/configs/snd_soc_msm_2x_Fusion3:system/etc/snd_soc_msm/snd_soc_msm_2x_Fusion3 \
-    device/xiaomi/aries/configs/snd_soc_msm_Sitar:system/etc/snd_soc_msm/snd_soc_msm_Sitar \
     device/xiaomi/aries/configs/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
@@ -78,7 +75,8 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/init.aries.syspart_system1.rc:root/init.aries.syspart_system1.rc \
     device/xiaomi/aries/configs/init.qcom.sh:root/init.qcom.sh \
     device/xiaomi/aries/configs/init.qcom.usb.sh:root/init.qcom.usb.sh \
-    device/xiaomi/aries/configs/init:root/init
+    device/xiaomi/aries/configs/init:root/init \
+    device/xiaomi/aries/configs/adbd:root/sbin/adbd
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \

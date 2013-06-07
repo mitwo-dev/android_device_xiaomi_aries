@@ -1734,22 +1734,25 @@ SectionDevice
 		'SLIM_0_RX Channels':0:One
 		'RX1 MIX1 INP1':0:RX1
 		'RX1 MIX1 INP2':0:RX6
-		'RX1 Digital Volume':1:68
-		'EAR PA Gain':0:POS_6_DB
+		'RX1 Digital Volume':1:80
+		'RX6 Digital Volume':1:80
 		'DAC1 Switch':1:1
 		'SLIM TX3 MUX':0:RMIX1
+		'RX1 Digital Volume':1:68
 	EndSequence
 
 	DisableSequence
 		'RX1 MIX1 INP1':0:ZERO
 		'RX1 MIX1 INP2':0:ZERO
-		'RX1 Digital Volume':1:68
 		'DAC1 Switch':1:0
+		'RX1 Digital Volume':1:0
+		'RX6 Digital Volume':1:0
 		'SLIM TX3 MUX':0:ZERO
 	EndSequence
 
 	ACDBID	7:1
 	EffectsMixerCTL "SRS TruMedia"
+	EC_REF_RXMixerCTL "SLIM_RX"
 
 EndSection
 
@@ -1761,21 +1764,43 @@ SectionDevice
 		'SLIM_0_RX Channels':0:One
 		'RX1 MIX1 INP1':0:RX1
 		'RX1 MIX1 INP2':0:RX6
-		'RX1 Digital Volume':1:68
-		'EAR PA Gain':0:POS_6_DB
+		'EAR PA Gain':0:POS_2_DB
 		'DAC1 Switch':1:1
 		'SLIM TX3 MUX':0:RMIX1
+		'IIR1 Band1':2:0x10000000 0x0 0x0 0x0 0x0
+		'IIR1 Band2':2:0x10000000 0x0 0x0 0x0 0x0
+		'IIR1 Band3':2:0x10000000 0x0 0x0 0x0 0x0
+		'IIR1 Band4':2:0x10000000 0x0 0x0 0x0 0x0
+		'IIR1 Band5':2:0x10000000 0x0 0x0 0x0 0x0
+		'IIR1 Enable Band1':1:1
+		'IIR1 Enable Band2':1:1
+		'IIR1 Enable Band3':1:1
+		'IIR1 Enable Band4':1:1
+		'IIR1 Enable Band5':1:1
+		'RX1 MIX2 INP1':0:IIR1
+		'RX1 Digital Volume':1:68
 	EndSequence
 
 	DisableSequence
 		'RX1 MIX1 INP1':0:ZERO
 		'RX1 MIX1 INP2':0:ZERO
-		'RX1 Digital Volume':1:68
 		'DAC1 Switch':1:0
 		'SLIM TX3 MUX':0:ZERO
+		'IIR1 Enable Band1':1:0
+		'IIR1 Enable Band2':1:0
+		'IIR1 Enable Band3':1:0
+		'IIR1 Enable Band4':1:0
+		'IIR1 Enable Band5':1:0
+		'IIR1 Band1':2:0x0 0x0 0x0 0x0 0x0
+		'IIR1 Band2':2:0x0 0x0 0x0 0x0 0x0
+		'IIR1 Band3':2:0x0 0x0 0x0 0x0 0x0
+		'IIR1 Band4':2:0x0 0x0 0x0 0x0 0x0
+		'IIR1 Band5':2:0x0 0x0 0x0 0x0 0x0
+		'RX1 MIX2 INP1':0:ZERO
 	EndSequence
 
 	ACDBID	7:1
+	EffectsMixerCTL "SRS TruMedia"
 
 EndSection
 
@@ -1896,24 +1921,28 @@ SectionDevice
 		'RX3 MIX1 INP2':0:RX6
 		'RX4 DSM MUX':0:DSM_INV
 		'RX3 Digital Volume':1:68
+		'RX4 Digital Volume':1:68
 		'LINEOUT1 Volume':1:100
 		'LINEOUT3 Volume':1:100
 		'SLIM TX3 MUX':0:RMIX3
+		'SLIM TX5 MUX':0:RMIX5
 	EndSequence
 
 	DisableSequence
 		'RX3 MIX1 INP1':0:ZERO
 		'RX3 MIX1 INP2':0:ZERO
 		'RX4 DSM MUX':0:CIC_OUT
-		'RX3 Digital Volume':1:68
+		'RX3 Digital Volume':1:0
+		'RX4 Digital Volume':1:0
 		'LINEOUT1 Volume':1:0
 		'LINEOUT3 Volume':1:0
 		'SLIM TX3 MUX':0:ZERO
+		'SLIM TX5 MUX':0:ZERO
 	EndSequence
 
 	ACDBID	14:1
-	EffectsMixerCTL "SRS TruMedia"
-
+        EffectsMixerCTL "SRS TruMedia"
+	EC_REF_RXMixerCTL "SLIM_RX"
 EndSection
 
 SectionDevice
@@ -2309,16 +2338,21 @@ SectionDevice
 
 	EnableSequence
 		'SLIM_0_TX Channels':0:One
-		'SLIM TX7 MUX':0:DEC8
-		'DEC8 MUX':0:ADC2
-		'ADC2 Volume':1:66
+		'SLIM TX7 MUX':0:DEC5
+		'DEC5 MUX':0:ADC2
+		'ADC2 Volume':1:0
+		'DEC5 Volume':1:68
+		'DYN MICBIAS MUX':0:MB1
 	EndSequence
 
 	DisableSequence
 		'SLIM TX7 MUX':0:ZERO
-		'DEC8 MUX':0:ZERO
+		'DEC5 MUX':0:ZERO
 		'ADC2 Volume':1:0
+		'DEC5 Volume':1:0
+		'DYN MICBIAS MUX':0:ZERO
 	EndSequence
+
 
 	ACDBID	8:2
 	EffectsMixerCTL "SRS TruMedia"
@@ -2331,16 +2365,21 @@ SectionDevice
 
 	EnableSequence
 		'SLIM_0_TX Channels':0:One
-		'SLIM TX7 MUX':0:DEC8
-		'DEC8 MUX':0:ADC2
-		'ADC2 Volume':1:66
+		'SLIM TX7 MUX':0:DEC5
+		'DEC5 MUX':0:ADC2
+		'DEC5 Volume':1:68
+		'ADC5 Volume':1:0
+		'DYN MICBIAS MUX':0:MB1
 	EndSequence
 
 	DisableSequence
 		'SLIM TX7 MUX':0:ZERO
-		'DEC8 MUX':0:ZERO
-		'ADC2 Volume':1:0
+		'DEC5 MUX':0:ZERO
+		'DEC5 Volume':1:0
+		'ADC5 Volume':1:0
+		'DYN MICBIAS MUX':0:ZERO
 	EndSequence
+
 
 	ACDBID	8:2
 	EffectsMixerCTL "SRS TruMedia"
@@ -2499,23 +2538,25 @@ SectionDevice
 	Name "Line"
 	Comment "Speaker Tx device"
 
-	EnableSequence
-		'SLIM_0_TX Channels':0:One
-		'SLIM TX7 MUX':0:DEC4
-		'DEC4 MUX':0:ADC3
-		'DEC4 Volume':1:80
-		'ADC3 Volume':1:100
-	EndSequence
+        EnableSequence
+                'SLIM_0_TX Channels':0:One
+                'SLIM TX7 MUX':0:DEC5
+                'DEC5 MUX':0:ADC2
+                'DEC5 Volume':1:68
+                'ADC2 Volume':1:0
+                'DYN MICBIAS MUX':0:MB2
+        EndSequence
 
-	DisableSequence
-		'SLIM TX7 MUX':0:ZERO
-		'DEC4 MUX':0:ZERO
-		'DEC4 Volume':1:60
-		'ADC3 Volume':1:0
-	EndSequence
+        DisableSequence
+                'SLIM TX7 MUX':0:ZERO
+                'DEC5 MUX':0:ZERO
+                'DEC5 Volume':1:0
+                'ADC2 Volume':1:0
+                'DYN MICBIAS MUX':0:ZERO
+        EndSequence
 
-	ACDBID	4:2
-	EffectsMixerCTL "SRS TruMedia"
+        ACDBID  4:2
+        EffectsMixerCTL "SRS TruMedia"
 
 EndSection
 
@@ -2525,17 +2566,19 @@ SectionDevice
 
 	EnableSequence
 		'SLIM_0_TX Channels':0:One
-		'SLIM TX7 MUX':0:DEC4
-		'DEC4 MUX':0:ADC3
-		'DEC4 Volume':1:70
-		'ADC3 Volume':1:100
+		'SLIM TX7 MUX':0:DEC5
+		'DEC5 MUX':0:ADC2
+		'DEC5 Volume':1:68
+		'ADC2 Volume':1:0
+		'DYN MICBIAS MUX':0:MB2
 	EndSequence
 
 	DisableSequence
 		'SLIM TX7 MUX':0:ZERO
-		'DEC4 MUX':0:ZERO
-		'DEC4 Volume':1:68
-		'ADC3 Volume':1:100
+		'DEC5 MUX':0:ZERO
+		'DEC5 Volume':1:0
+		'ADC2 Volume':1:0
+		'DYN MICBIAS MUX':0:ZERO
 	EndSequence
 
 	ACDBID	11:2
