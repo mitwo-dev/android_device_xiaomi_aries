@@ -29,28 +29,33 @@ import init.aries.usb.rc
 import init.aries.syspart_${ro.boot.syspart}.rc
 import init.target.rc
 
-on init
-    # Set permissions for persist partition
-    mkdir /persist 0771 system system
-    # Debugfs for developing
+on early-init
     mount debugfs debugfs /sys/kernel/debug
     write /proc/sys/vm/legacy_va_layout 1
 
+on init
+    mkdir /storage/sdcard0 0775 system system
+    mkdir /storage/usbdisk 0775 system system
+    mkdir /storage_int 0775 media_rw media_rw
+    chown media_rw media_rw /storage_int
+    export EXTERNAL_STORAGE /storage/sdcard0
+
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
+    symlink /storage/usbdisk /usbdisk
+    symlink /storage/usbdisk /mnt/usbdisk
+    
+    # Set permissions for persist partition
+    mkdir /persist 0771 system system
+   
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
-
-on early-init
-    # for backwards compatibility
-    export EXTERNAL_STORAGE /storage/sdcard0
-    mkdir /storage 0775 system sdcard_r
-    mkdir /storage/sdcard0 0775 system system
-    mkdir /storage/udisk 0775 system system
-    mkdir /storage_int 0775 media_rw media_rw
-    chown media_rw media_rw /storage_int
-    symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/sdcard
-
+    
+on fs
+    # Create a mount point on tmpfs to store modem files.
+    mkdir /mnt/qcks 0700 root system
+    mount tmpfs tmpfs /mnt/qcks mode=0770,uid=1000,gid=1000
 
 on boot
     exec system/bin/btnvtool -O
@@ -83,6 +88,8 @@ on boot
     chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
     setprop wifi.interface wlan0
+
+    chmod 0666 /sys/class/leds/flashlight/brightness
 
     setprop ro.telephony.call_ring.multiple false
 
@@ -602,7 +609,6 @@ service profiler_daemon /system/bin/profiler_daemon
 
 service sdcard /system/bin/sdcard /storage_int /storage/sdcard0 1023 1023
     class late_start
-    disabled
 
 on property:ro.fuse_sdcard=true
     start sdcard
