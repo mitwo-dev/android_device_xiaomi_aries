@@ -30,6 +30,11 @@ PRODUCT_MODEL := MI 2
 PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_RESTRICT_VENDOR_FILES := false
 
+## VoiceProc modules                                                                                              
+PRODUCT_PACKAGES += voiceproc_init.img
+PRODUCT_PACKAGES += voiceproc.img
+PRODUCT_PACKAGES += vpcmd
+
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/xiaomi/aries/device.mk)
 $(call inherit-product-if-exists, vendor/xiaomi/aries/aries-vendor.mk)

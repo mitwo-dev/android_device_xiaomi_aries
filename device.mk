@@ -120,6 +120,24 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml
 
+PRODUCT_COPY_FILES += \
+    device/xiaomi/aries/modules/bluetooth-power.ko:system/lib/modules/bluetooth-power.ko \
+    device/xiaomi/aries/modules/dma_test.ko:system/lib/modules/dma_test.ko \
+    device/xiaomi/aries/modules/eeprom_93cx6.ko:system/lib/modules/eeprom_93cx6.ko \
+    device/xiaomi/aries/modules/evbug.ko:system/lib/modules/evbug.ko \
+    device/xiaomi/aries/modules/gspca_main.ko:system/lib/modules/gspca_main.ko \
+    device/xiaomi/aries/modules/ks8851.ko:system/lib/modules/ks8851.ko \
+    device/xiaomi/aries/modules/lcd.ko:system/lib/modules/lcd.ko \
+    device/xiaomi/aries/modules/mmc_block_test.ko:system/lib/modules/mmc_block_test.ko \
+    device/xiaomi/aries/modules/mmc_test.ko:system/lib/modules/mmc_test.ko \
+    device/xiaomi/aries/modules/msm-buspm-dev.ko:system/lib/modules/msm-buspm-dev.ko \
+    device/xiaomi/aries/modules/radio-iris-transport.ko:system/lib/modules/radio-iris-transport.ko \
+    device/xiaomi/aries/modules/reset_modem.ko:system/lib/modules/reset_modem.ko \
+    device/xiaomi/aries/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
+    device/xiaomi/aries/modules/spidev.ko:system/lib/modules/spidev.ko \
+    device/xiaomi/aries/modules/test-iosched.ko:system/lib/modules/test-iosched.ko \
+    device/xiaomi/aries/modules/wlan.ko:system/lib/modules/wlan.ko
+
 # GPS configuration
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/gps.conf:system/etc/gps.conf
@@ -195,10 +213,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=smd
 
 PRODUCT_PACKAGES += \
-	camera.aries \
-	camera.msm8960 \
-	libmmcamera_interface2 \
-	libmmcamera_interface
+	camera.default
 
 PRODUCT_PACKAGES += \
     libmm-omxcore \

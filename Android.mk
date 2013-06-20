@@ -24,6 +24,8 @@
 # components.
 
 ifneq ($(filter aries,$(TARGET_DEVICE)),)
+# Hack for build audio-caf 
+$(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr/include)
 
 LOCAL_PATH := $(call my-dir)
 
@@ -35,6 +37,21 @@ LOCAL_SRC_FILES    := $(LOCAL_MODULE)
 LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/wifi
 include $(BUILD_PREBUILT)
 
+include $(CLEAR_VARS)
+LOCAL_MODULE       := voiceproc_init.img
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := voiceproc_init.img
+LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/firmware
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE       := voiceproc.img
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := voiceproc.img
+LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/firmware
+include $(BUILD_PREBUILT)
 endif
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
