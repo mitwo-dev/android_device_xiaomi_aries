@@ -24,7 +24,7 @@
              android:storageDescription="@string/storage_internal"
              android:primary="true"
              android:removable="false"
-             android:allowMassStorage="true" />
+             android:allowMassStorage="false" />
 
     <!-- external usb storage -->
     <storage android:mountPoint="/storage/usbdisk"
