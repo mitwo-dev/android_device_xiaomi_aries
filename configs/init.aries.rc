@@ -51,11 +51,6 @@ on init
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
-    
-on fs
-    # Create a mount point on tmpfs to store modem files.
-    mkdir /mnt/qcks 0700 root system
-    mount tmpfs tmpfs /mnt/qcks mode=0770,uid=1000,gid=1000
 
 on boot
     exec system/bin/btnvtool -O
@@ -114,10 +109,15 @@ on boot
     chmod 0664 /sys/devices/virtual/graphics/fb1/hpd
     chmod 0664 /sys/devices/virtual/graphics/fb1/video_mode
     chmod 0664 /sys/devices/virtual/graphics/fb1/format_3d
+    chmod 0664 /sys/devices/virtual/graphics/fb1/vendor_name
+    chmod 0664 /sys/devices/virtual/graphics/fb1/product_description
 
     # Change owner and group for media server and surface flinger
     chown system system /sys/devices/virtual/graphics/fb1/format_3d
     chown system system /sys/devices/virtual/graphics/fb1/hpd
+    chown system system /sys/devices/virtual/graphics/fb1/vendor_name
+    chown system system /sys/devices/virtual/graphics/fb1/product_description
+
 
     #For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
@@ -242,6 +242,21 @@ on post-fs-data
     mkdir /data/system 0775 system system
     #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 
+    #Create directory used by sensor subsystem(dsps)
+    mkdir /data/system/sensors
+    touch /data/system/sensors/settings
+    chmod 775 /data/system/sensors
+    write /data/system/sensors/settings 1
+    chmod 664 /data/system/sensors/settings
+    chown system /data/system/sensors/settings
+
+    mkdir /data/misc/sensors
+    chmod 775 /data/misc/sensors
+    mkdir /persist/misc/sensors
+    chmod 775 /persist/misc/sensors
+
+    start sensors
+
     #Create directories for wiper services
     mkdir /data/wpstiles/ 0755 shell
     mkdir /data/wiper 0755 gps qcom_oncrpc
@@ -279,9 +294,10 @@ on post-fs-data
     mkdir /data/audio 0770 media audio
     chmod 2770 /data/audio
 
-    # Camera
-    mkdir /data/camera 0771 root camera
+    # kickstart
     mkdir /data/qcks 0770 system system
+    mount tmpfs tmpfs /data/qcks size=20m,mode=0750,gid=1000
+    chown system /dev/block/platform/msm_sdcc.1/by-name
 
     setprop vold.post_fs_data_done 1
     chown system /dev/block/platform/msm_sdcc.1/by-name
@@ -296,6 +312,13 @@ on post-fs-data
     # communicate with mpdecision
     mkdir /dev/socket/mpdecision 0770 system system
     chmod 2770 /dev/socket/mpdecision
+
+    # Tombstone dropboxes
+    mkdir /data/tombstones 0771 system system
+    mkdir /data/tombstones/modem 0771 system system
+    mkdir /data/tombstones/lpass 0771 system system
+    mkdir /data/tombstones/wcnss 0771 system system
+    mkdir /data/tombstones/dsps 0771 system system
 
 on charger
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system wait ro barrier=1
@@ -408,6 +431,11 @@ service qmuxd /system/bin/qmuxd
     group radio audio bluetooth gps qcom_diag
     disabled
 
+service audiod /system/bin/audiod
+    class main
+    user system
+    group audio
+
 service netmgrd /system/bin/netmgrd
     class main
 
@@ -415,6 +443,7 @@ service sensors /system/bin/sensors.qcom
     class late_start
     user root
     group root
+    disabled
 
 service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -N \
