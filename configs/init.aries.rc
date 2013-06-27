@@ -88,6 +88,10 @@ on boot
 
     setprop ro.telephony.call_ring.multiple false
 
+    #Set SUID bit for usbhub
+    chmod 4755 /system/bin/usbhub
+    chmod 755 /system/bin/usbhub_init
+
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
@@ -168,6 +172,7 @@ on boot
     # Otherwise, a weird issue happens in which some long
     # connections on high-throughput links get dropped when
     # an ack packet comes out of order
+    write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
     setprop ro.fuse_sdcard ${persist.fuse_sdcard}
 
     chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy

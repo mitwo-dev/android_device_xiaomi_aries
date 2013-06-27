@@ -28,10 +28,6 @@ DEVICE_PACKAGE_OVERLAYS := device/xiaomi/aries/overlay
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-LOCAL_KERNEL := device/xiaomi/aries/kernel
-
-PRODUCT_COPY_FILES := \
-	$(LOCAL_KERNEL):kernel
 
 # Charger
 PRODUCT_COPY_FILES += \
@@ -73,10 +69,9 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/init.target.rc:root/init.target.rc \
     device/xiaomi/aries/configs/init.aries.syspart_system.rc:root/init.aries.syspart_system.rc \
     device/xiaomi/aries/configs/init.aries.syspart_system1.rc:root/init.aries.syspart_system1.rc \
-    device/xiaomi/aries/configs/init.qcom.sh:root/init.qcom.sh \
     device/xiaomi/aries/configs/init.qcom.usb.sh:root/init.qcom.usb.sh \
-    device/xiaomi/aries/configs/init:root/init \
-    device/xiaomi/aries/configs/adbd:root/sbin/adbd
+#    device/xiaomi/aries/configs/init:root/init \
+#    device/xiaomi/aries/configs/adbd:root/sbin/adbd
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
@@ -120,24 +115,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml
 
-PRODUCT_COPY_FILES += \
-    device/xiaomi/aries/modules/bluetooth-power.ko:system/lib/modules/bluetooth-power.ko \
-    device/xiaomi/aries/modules/dma_test.ko:system/lib/modules/dma_test.ko \
-    device/xiaomi/aries/modules/eeprom_93cx6.ko:system/lib/modules/eeprom_93cx6.ko \
-    device/xiaomi/aries/modules/evbug.ko:system/lib/modules/evbug.ko \
-    device/xiaomi/aries/modules/gspca_main.ko:system/lib/modules/gspca_main.ko \
-    device/xiaomi/aries/modules/ks8851.ko:system/lib/modules/ks8851.ko \
-    device/xiaomi/aries/modules/lcd.ko:system/lib/modules/lcd.ko \
-    device/xiaomi/aries/modules/mmc_block_test.ko:system/lib/modules/mmc_block_test.ko \
-    device/xiaomi/aries/modules/mmc_test.ko:system/lib/modules/mmc_test.ko \
-    device/xiaomi/aries/modules/msm-buspm-dev.ko:system/lib/modules/msm-buspm-dev.ko \
-    device/xiaomi/aries/modules/radio-iris-transport.ko:system/lib/modules/radio-iris-transport.ko \
-    device/xiaomi/aries/modules/reset_modem.ko:system/lib/modules/reset_modem.ko \
-    device/xiaomi/aries/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
-    device/xiaomi/aries/modules/spidev.ko:system/lib/modules/spidev.ko \
-    device/xiaomi/aries/modules/test-iosched.ko:system/lib/modules/test-iosched.ko \
-    device/xiaomi/aries/modules/wlan.ko:system/lib/modules/wlan.ko
-
 # GPS configuration
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/gps.conf:system/etc/gps.conf
@@ -149,22 +126,22 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320
 
 # Audio Configuration
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    persist.audio.fluence.mode=endfire \
-#    persist.audio.vr.enable=false \
-#    persist.audio.handset.mic=digital \
-#    af.resampler.quality=255 \
-#    mpq.audio.decode=true
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.audio.fluence.mode=endfire \
+    persist.audio.vr.enable=false \
+    persist.audio.handset.mic=digital \
+    af.resampler.quality=255 \
+    mpq.audio.decode=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.aries.power_profile=middle
 
 # Audio Configuration
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.audio.handset.mic=dmic \
-	persist.audio.fluence.mode=endfire \
-	persist.audio.lowlatency.rec=false \
-	af.resampler.quality=4
+#PRODUCT_PROPERTY_OVERRIDES += \
+#	persist.audio.handset.mic=dmic \
+#	persist.audio.fluence.mode=endfire \
+#	persist.audio.lowlatency.rec=false \
+#	af.resampler.quality=4
 
 # Do not power down SIM card when modem is sent to Low Power Mode.
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -195,7 +172,8 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8960 \
     gralloc.msm8960 \
     copybit.msm8960 \
-    lights.msm8960
+    lights.msm8960 \
+    camera-wrapper.msm8960
 
 PRODUCT_PACKAGES += \
     alsa.msm8960 \

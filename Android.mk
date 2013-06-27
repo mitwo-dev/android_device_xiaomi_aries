@@ -24,8 +24,6 @@
 # components.
 
 ifneq ($(filter aries,$(TARGET_DEVICE)),)
-# Hack for build audio-caf 
-$(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr/include)
 
 LOCAL_PATH := $(call my-dir)
 
