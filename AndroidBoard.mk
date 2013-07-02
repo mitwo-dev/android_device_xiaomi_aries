@@ -12,10 +12,7 @@ else
     KERNEL_DEFCONFIG := aries-perf-usr_defconfig
 endif
 
-
-$(call inherit-product-if-exists, include device/xiaomi/aries/kernel/AndroidKernel.mk)
-$(call inherit-product-if-exists, include kernel/xiaomi/aries/AndroidKernel.mk)
-
+include device/xiaomi/aries/kernel/AndroidKernel.mk
 
 $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP) $(TARGET_PREBUILT_KERNEL_INCLUDE)
 	$(transform-prebuilt-to-target)
