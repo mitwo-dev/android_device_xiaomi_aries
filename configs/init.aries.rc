@@ -97,8 +97,6 @@ on boot
 
     setprop wifi.interface wlan0
 
-    chmod 0666 /sys/class/leds/flashlight/brightness
-
     setprop ro.telephony.call_ring.multiple false
 
     #Set SUID bit for usbhub
@@ -197,7 +195,7 @@ on boot
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chown system system /sys/class/leds/flashlight/brightness
-    chmod 0664 /sys/class/leds/flashlight/brightness
+    chmod 0666 /sys/class/leds/flashlight/brightness
     chown system system /sys/class/leds/led:red/brightness
     chown system system /sys/class/leds/led:green/brightness
     chown system system /sys/class/leds/led:blue/brightness
