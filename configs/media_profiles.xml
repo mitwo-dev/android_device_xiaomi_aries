@@ -141,7 +141,7 @@
             <Video codec="h264"
                    bitRate="12000000"
                    width="1920"
-                   height="1080"
+                   height="1088"
                    frameRate="30" />
             <Audio codec="aac"
                    bitRate="96000"
@@ -205,7 +205,7 @@
             <Video codec="h264"
                    bitRate="12000000"
                    width="1920"
-                   height="1080"
+                   height="1088"
                    frameRate="30" />
             <!-- audio setting is ignored -->
             <Audio codec="aac"
@@ -341,7 +341,7 @@
     <VideoEncoderCap name="h264" enabled="true"
         minBitRate="64000" maxBitRate="12000000"
         minFrameWidth="176" maxFrameWidth="1920"
-        minFrameHeight="144" maxFrameHeight="1080"
+        minFrameHeight="144" maxFrameHeight="1088"
         minFrameRate="15" maxFrameRate="30" />
 
     <VideoEncoderCap name="h263" enabled="true"
@@ -353,7 +353,7 @@
     <VideoEncoderCap name="m4v" enabled="true"
         minBitRate="64000" maxBitRate="4000000"
         minFrameWidth="176" maxFrameWidth="1920"
-        minFrameHeight="144" maxFrameHeight="1080"
+        minFrameHeight="144" maxFrameHeight="1088"
         minFrameRate="15" maxFrameRate="30" />
 
     <AudioEncoderCap name="aac" enabled="true"
@@ -403,8 +403,8 @@
         frames) memory.
     -->
     <VideoEditorCap  maxInputFrameWidth="1920"
-        maxInputFrameHeight="1080" maxOutputFrameWidth="1920"
-        maxOutputFrameHeight="1080" maxPrefetchYUVFrames="10"/>
+        maxInputFrameHeight="1088" maxOutputFrameWidth="1920"
+        maxOutputFrameHeight="1088" maxPrefetchYUVFrames="10"/>
     <!--
         The VideoEditor Export codec profile and level values
         correspond to the values in OMX_Video.h.
