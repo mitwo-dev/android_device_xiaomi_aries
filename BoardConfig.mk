@@ -72,6 +72,7 @@ WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME          := "wlan"
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_AP           := "ap"
+BOARD_MITWO_READ_WLAN_MAC        := true
 
 BOARD_EGL_CFG := device/xiaomi/aries/configs/egl.cfg
 
