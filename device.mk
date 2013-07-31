@@ -28,14 +28,14 @@ DEVICE_PACKAGE_OVERLAYS := device/xiaomi/aries/overlay
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
+#LOCAL_KERNEL := device/xiaomi/aries/kernel/kernel
+
+#PRODUCT_COPY_FILES := \
+#	$(LOCAL_KERNEL):kernel
 
 # Charger
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/chargeonlymode:root/sbin/chargeonlymode
-
-# Vold and Storage
-PRODUCT_COPY_FILES += \
-    device/xiaomi/aries/configs/vold.fstab:system/etc/vold.fstab
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
@@ -43,6 +43,10 @@ PRODUCT_PACKAGES += \
     LiveWallpapersPicker \
     VisualizationWallpapers \
     librs_jni
+
+# Charger
+PRODUCT_COPY_FILES += \
+    device/xiaomi/aries/libril.so:system/lib/libril.so
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
@@ -70,8 +74,8 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/init.aries.syspart_system.rc:root/init.aries.syspart_system.rc \
     device/xiaomi/aries/configs/init.aries.syspart_system1.rc:root/init.aries.syspart_system1.rc \
     device/xiaomi/aries/configs/init.qcom.usb.sh:root/init.qcom.usb.sh \
-#    device/xiaomi/aries/configs/init:root/init \
-#    device/xiaomi/aries/configs/adbd:root/sbin/adbd
+    device/xiaomi/aries/configs/init:root/init \
+    device/xiaomi/aries/configs/adbd:root/sbin/adbd
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
@@ -135,13 +139,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.aries.power_profile=middle
-
-# Audio Configuration
-#PRODUCT_PROPERTY_OVERRIDES += \
-#	persist.audio.handset.mic=dmic \
-#	persist.audio.fluence.mode=endfire \
-#	persist.audio.lowlatency.rec=false \
-#	af.resampler.quality=4
 
 # Do not power down SIM card when modem is sent to Low Power Mode.
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -250,12 +247,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.ramdump_sdcard=0 \
     persist.radio.ramdump_num=3
 
-
-# for bugmailer
-PRODUCT_PACKAGES += send_bug
-PRODUCT_COPY_FILES += \
-    system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
-    system/extras/bugmailer/send_bug:system/bin/send_bug
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/mount_ext4.sh:system/bin/mount_ext4.sh
