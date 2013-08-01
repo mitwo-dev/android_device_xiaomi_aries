@@ -55,7 +55,12 @@ BOARD_KERNEL_BASE      := 0x80200000
 BOARD_KERNEL_PAGESIZE  := 2048
 BOARD_KERNEL_CMDLINE   := console=ttyHSL0,115200,n8 androidboot.hardware=aries ehci-hcd.park=3 maxcpus=2
 BOARD_MKBOOTIMG_ARGS   := --ramdisk_offset 0x02000000
+
+ifneq ($(BUILD_KERNEL),true)
 TARGET_PREBUILT_KERNEL := device/xiaomi/aries/kernel/kernel
+else
+TARGET_PREBUILT_KERNEL :=
+endif
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/xiaomi/aries
 

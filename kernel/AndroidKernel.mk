@@ -1,3 +1,4 @@
+ifneq ($(BUILD_KERNEL),true)
 ifneq ($(TARGET_PREBUILT_KERNEL),)
 LOCAL_PRIVATE_PATH := device/xiaomi/aries/kernel
 
@@ -9,4 +10,5 @@ $(TARGET_PREBUILT_KERNEL_INCLUDE):
 	-cp -rf $(LOCAL_PRIVATE_PATH)/include/* $(KERNEL_OUT)/
 else
 TARGET_PREBUILT_KERNEL_INCLUDE:=
+endif
 endif
