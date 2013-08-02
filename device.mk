@@ -169,9 +169,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8960 \
     gralloc.msm8960 \
     copybit.msm8960 \
-    lights.msm8960 \
-    camera-wrapper.msm8960 \
-    power.msm8960
+    lights.msm8960
 
 PRODUCT_PACKAGES += \
     alsa.msm8960 \
