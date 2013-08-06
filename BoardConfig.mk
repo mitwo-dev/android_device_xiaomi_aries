@@ -82,6 +82,9 @@ TARGET_QCOM_DISPLAY_VARIANT := caf
 TARGET_QCOM_AUDIO_VARIANT   := caf
 TARGET_USES_QCOM_BSP        := true
 
+# QCOM enhanced A/V
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
+
 #Display
 TARGET_USES_ION             := true
 USE_OPENGL_RENDERER         := true
