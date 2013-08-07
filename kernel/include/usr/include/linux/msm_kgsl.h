@@ -2,7 +2,7 @@
 #define _MSM_KGSL_H
 
 #define KGSL_VERSION_MAJOR        3
-#define KGSL_VERSION_MINOR        12
+#define KGSL_VERSION_MINOR        14
 
 /*context flags */
 #define KGSL_CONTEXT_SAVE_GMEM		0x00000001
@@ -12,11 +12,48 @@
 #define KGSL_CONTEXT_PREAMBLE		0x00000010
 #define KGSL_CONTEXT_TRASH_STATE	0x00000020
 #define KGSL_CONTEXT_PER_CONTEXT_TS	0x00000040
+#define KGSL_CONTEXT_USER_GENERATED_TS	0x00000080
+#define KGSL_CONTEXT_NO_FAULT_TOLERANCE 0x00000200
+
 
 #define KGSL_CONTEXT_INVALID 0xffffffff
 
 /* Memory allocayion flags */
 #define KGSL_MEMFLAGS_GPUREADONLY	0x01000000
+
+#define KGSL_MEMTYPE_MASK		0x0000FF00
+#define KGSL_MEMTYPE_SHIFT		8
+
+/* Memory types for which allocations are made */
+#define KGSL_MEMTYPE_OBJECTANY			0
+#define KGSL_MEMTYPE_FRAMEBUFFER		1
+#define KGSL_MEMTYPE_RENDERBUFFER		2
+#define KGSL_MEMTYPE_ARRAYBUFFER		3
+#define KGSL_MEMTYPE_ELEMENTARRAYBUFFER		4
+#define KGSL_MEMTYPE_VERTEXARRAYBUFFER		5
+#define KGSL_MEMTYPE_TEXTURE			6
+#define KGSL_MEMTYPE_SURFACE			7
+#define KGSL_MEMTYPE_EGL_SURFACE		8
+#define KGSL_MEMTYPE_GL				9
+#define KGSL_MEMTYPE_CL				10
+#define KGSL_MEMTYPE_CL_BUFFER_MAP		11
+#define KGSL_MEMTYPE_CL_BUFFER_NOMAP		12
+#define KGSL_MEMTYPE_CL_IMAGE_MAP		13
+#define KGSL_MEMTYPE_CL_IMAGE_NOMAP		14
+#define KGSL_MEMTYPE_CL_KERNEL_STACK		15
+#define KGSL_MEMTYPE_COMMAND			16
+#define KGSL_MEMTYPE_2D				17
+#define KGSL_MEMTYPE_EGL_IMAGE			18
+#define KGSL_MEMTYPE_EGL_SHADOW			19
+#define KGSL_MEMTYPE_MULTISAMPLE		20
+#define KGSL_MEMTYPE_KERNEL			255
+
+/*
+ * Alignment hint, passed as the power of 2 exponent.
+ * i.e 4k (2^12) would be 12, 64k (2^16)would be 16.
+ */
+#define KGSL_MEMALIGN_MASK		0x00FF0000
+#define KGSL_MEMALIGN_SHIFT		16
 
 /* generic flag values */
 #define KGSL_FLAGS_NORMALMODE  0x00000000
@@ -38,6 +75,9 @@
 #define KGSL_CLK_MEM	0x00000008
 #define KGSL_CLK_MEM_IFACE 0x00000010
 #define KGSL_CLK_AXI	0x00000020
+
+/* Server Side Sync Timeout in milliseconds */
+#define KGSL_SYNCOBJ_SERVER_TIMEOUT 2000
 
 /*
  * Reset status values for context
@@ -278,8 +318,7 @@ struct kgsl_map_user_mem {
 	unsigned int offset;
 	unsigned int hostptr;   /*input param */
 	enum kgsl_user_mem_type memtype;
-	unsigned int reserved;	/* May be required to add
-				params for another mem type */
+	unsigned int flags;
 };
 
 #define IOCTL_KGSL_MAP_USER_MEM \

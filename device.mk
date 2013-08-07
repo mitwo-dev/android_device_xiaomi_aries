@@ -69,7 +69,7 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/init.target.rc:root/init.target.rc \
     device/xiaomi/aries/configs/init.aries.syspart_system.rc:root/init.aries.syspart_system.rc \
     device/xiaomi/aries/configs/init.aries.syspart_system1.rc:root/init.aries.syspart_system1.rc \
-    device/xiaomi/aries/configs/init.qcom.usb.sh:root/init.qcom.usb.sh \
+    device/xiaomi/aries/configs/init.qcom.usb.sh:root/init.qcom.usb.sh
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
@@ -112,9 +112,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml
-
-PRODUCT_COPY_FILES += \
-    device/xiaomi/aries/modules/wlan.ko:system/lib/modules/wlan.ko
 
 # GPS configuration
 PRODUCT_COPY_FILES += \

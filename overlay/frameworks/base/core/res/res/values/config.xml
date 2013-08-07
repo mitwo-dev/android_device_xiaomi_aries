@@ -23,7 +23,7 @@
     <bool name="config_animateScreenLights">false</bool>
 
     <!-- Default color for notification LED is white. -->
-    <color name="config_defaultNotificationColor">#ffffffff</color>
+<!--    <color name="config_defaultNotificationColor">#ffffffff</color> -->
 
     <!-- Default LED on time for notification LED in milliseconds. -->
     <integer name="config_defaultNotificationLedOn">500</integer>
@@ -123,6 +123,7 @@
          be empty.  An example would be "usb.*" -->
     <string-array translatable="false" name="config_tether_usb_regexs">
         <item>"usb\\d"</item>
+        <item>"rndis\\d"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
@@ -130,7 +131,6 @@
          should be empty.  An example would be "softap.*" -->
     <string-array translatable="false" name="config_tether_wifi_regexs">
         <item>"wlan0"</item>
-        <item>"softap.*"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
@@ -154,7 +154,7 @@
     <bool name="config_unplugTurnsOnScreen">true</bool>
 
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
-    <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
+    <bool translatable="false" name="config_wifi_dual_band_support">false</bool>
 
     <!-- Boolean indicating whether the wifi chipset has background scan support -->
     <bool translatable="false" name="config_wifi_background_scan_support">false</bool>
@@ -190,6 +190,7 @@
         <item>"mobile_cbs,12,0,2,60000,true"</item>
         <item>"wifi_p2p,13,1,0,-1,true"</item>
         <item>"bluetooth,7,7,2,-1,true"</item>
+        <item>"usbsharenet,14,14,4,-1,true"</item>
     </string-array>
 
     <!-- This string array should be overridden by the device to present a list of radio

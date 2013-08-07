@@ -1,5 +1,5 @@
-/* Copyright (c) 2009-2012, Code Aurora Forum. All rights reserved.
- *
+/* Copyright (c) 2009-2013, The Linux Foundation. All rights reserved.
+*
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
  * only version 2 as published by the Free Software Foundation.
@@ -23,7 +23,8 @@
 #else
 #include <linux/time.h>
 #endif
-#include <linux/ion.h>
+
+#include <linux/msm_ion.h>
 
 #define BIT(nr)   (1UL << (nr))
 
