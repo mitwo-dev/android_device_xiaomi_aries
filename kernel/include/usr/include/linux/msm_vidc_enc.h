@@ -168,8 +168,8 @@
 #define VEN_IOCTLBASE_ENC	0x850
 
 struct venc_ioctl_msg{
-	void __user *in;
-	void __user *out;
+	void *in;
+	void *out;
 };
 
 /*NON ENCODER CONFIGURATION IOCTLs*/

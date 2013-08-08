@@ -31,7 +31,7 @@ on early-init
     mkdir /firmware 0771 system system
     symlink /data/tombstones /tombstones
 
-on emmc-fs
+on fs
     # Keeping following partitions outside fstab file. As user may not have
     # these partition flashed on the device. Failure to mount any partition in fstab file
     # results in failure to launch late-start class.

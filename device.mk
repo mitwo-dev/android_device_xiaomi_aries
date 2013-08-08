@@ -28,10 +28,6 @@ DEVICE_PACKAGE_OVERLAYS := device/xiaomi/aries/overlay
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-#LOCAL_KERNEL := device/xiaomi/aries/kernel/kernel
-
-#PRODUCT_COPY_FILES := \
-#	$(LOCAL_KERNEL):kernel
 
 # Charger
 PRODUCT_COPY_FILES += \
@@ -52,6 +48,11 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     device/xiaomi/aries/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
     device/xiaomi/aries/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
+
+ifneq ($(BUILD_KERNEL),true)
+PRODUCT_COPY_FILES += \
+    device/xiaomi/aries/kernel/wlan.ko:system/lib/modules/wlan.ko
+endif
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/snd_soc_msm_2x_Fusion3:system/etc/snd_soc_msm/snd_soc_msm_2x_Fusion3 \
@@ -74,8 +75,7 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/init.aries.syspart_system.rc:root/init.aries.syspart_system.rc \
     device/xiaomi/aries/configs/init.aries.syspart_system1.rc:root/init.aries.syspart_system1.rc \
     device/xiaomi/aries/configs/init.qcom.usb.sh:root/init.qcom.usb.sh \
-    device/xiaomi/aries/configs/init:root/init \
-    device/xiaomi/aries/configs/adbd:root/sbin/adbd
+    device/xiaomi/aries/configs/init:root/init
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
@@ -163,14 +163,19 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     e2fsck
 
+# QCOM Display
 PRODUCT_PACKAGES += \
     libgenlock \
+    libmemalloc \
     liboverlay \
+    libqdutils \
+    libtilerenderer \
+    libI420colorconvert \
     hwcomposer.msm8960 \
     gralloc.msm8960 \
-    copybit.msm8960 \
-    lights.msm8960
+    copybit.msm8960
 
+# Audio
 PRODUCT_PACKAGES += \
     alsa.msm8960 \
     audio_policy.msm8960 \
@@ -178,28 +183,44 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    libaudio-resampler
+    libaudio-resampler \
+    tinymix
 
+# BT
 PRODUCT_PACKAGES += \
     hci_qcomm_init
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=smd
 
+# Omx
 PRODUCT_PACKAGES += \
-    libmm-omxcore \
-    libdivxdrmdecrypt \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxCore \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc \
     libOmxVdec \
     libOmxVenc \
-    libOmxCore \
-    libstagefrighthw \
-    libc2dcolorconvert
+    libc2dcolorconvert \
+    libdashplayer \
+    libdivxdrmdecrypt \
+    libmm-omxcore \
+    libstagefrighthw
+
+# Light
+PRODUCT_PACKAGES += \
+    lights.msm8960
 
 PRODUCT_PACKAGES += \
     libwfcu
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-qmi-1.so
+
+# QCOM
+PRODUCT_PROPERTY_OVERRIDES += \
+    com.qc.hardware=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     telephony.lteOnCdmaDevice=0
@@ -245,6 +266,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.ramdump_sdcard=0 \
     persist.radio.ramdump_num=3
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.selinux=1
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/mount_ext4.sh:system/bin/mount_ext4.sh

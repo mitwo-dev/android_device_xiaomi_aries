@@ -557,6 +557,19 @@ struct ion_custom_data {
 	unsigned int cmd;
 	unsigned long arg;
 };
+
+struct ion_flush_data {
+        struct ion_handle *handle;
+        int fd;
+        void *vaddr;
+        unsigned int offset;
+        unsigned int length;
+};
+struct ion_flag_data {
+        struct ion_handle *handle;
+        unsigned long flags;
+};
+
 #define ION_IOC_MAGIC		'I'
 
 /**
@@ -567,6 +580,7 @@ struct ion_custom_data {
  */
 #define ION_IOC_ALLOC		_IOWR(ION_IOC_MAGIC, 0, \
 				      struct ion_allocation_data)
+
 
 #define ION_IOC_ALLOC_COMPAT		_IOWR(ION_IOC_MAGIC, 0, \
 				      struct ion_allocation_data_compat)

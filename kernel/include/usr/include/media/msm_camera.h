@@ -18,9 +18,6 @@
 #endif
 #include <linux/types.h>
 #include <linux/ioctl.h>
-#ifdef __KERNEL__
-#include <linux/cdev.h>
-#endif
 #ifdef MSM_CAMERA_GCC
 #include <time.h>
 #else
@@ -1616,7 +1613,7 @@ struct img_plane_info {
 	_IOWR('V', BASE_VIDIOC_PRIVATE + 6, struct v4l2_event)
 
 struct msm_camera_v4l2_ioctl_t {
-	void __user *ioctl_ptr;
+	void *ioctl_ptr;
 };
 
 #endif /* __LINUX_MSM_CAMERA_H */

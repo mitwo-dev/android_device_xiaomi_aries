@@ -126,17 +126,17 @@ struct kgsl_devinfo {
 };
 
 /* this structure defines the region of memory that can be mmap()ed from this
-   driver. The timestamp fields are volatile because they are written by the
+   driver. The timestamp fields are __volatile__ because they are written by the
    GPU
 */
 struct kgsl_devmemstore {
-	volatile unsigned int soptimestamp;
+	__volatile__ unsigned int soptimestamp;
 	unsigned int sbz;
-	volatile unsigned int eoptimestamp;
+	__volatile__ unsigned int eoptimestamp;
 	unsigned int sbz2;
-	volatile unsigned int ts_cmp_enable;
+	__volatile__ unsigned int ts_cmp_enable;
 	unsigned int sbz3;
-	volatile unsigned int ref_wait_ts;
+	__volatile__ unsigned int ref_wait_ts;
 	unsigned int sbz4;
 	unsigned int current_context;
 	unsigned int sbz5;
@@ -513,12 +513,4 @@ struct kgsl_timestamp_event_fence {
 #define IOCTL_KGSL_TIMESTAMP_EVENT \
 	_IOWR(KGSL_IOC_TYPE, 0x33, struct kgsl_timestamp_event)
 
-#ifdef __KERNEL__
-#ifdef CONFIG_MSM_KGSL_DRM
-int kgsl_gem_obj_addr(int drm_fd, int handle, unsigned long *start,
-			unsigned long *len);
-#else
-#define kgsl_gem_obj_addr(...) 0
-#endif
-#endif
 #endif /* _MSM_KGSL_H */

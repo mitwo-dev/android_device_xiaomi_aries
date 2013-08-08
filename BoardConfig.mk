@@ -72,6 +72,8 @@ BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
+WIFI_DRIVER_MODULE_NAME          := "wlan"
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_AP           := "ap"
 
@@ -119,7 +121,7 @@ BLUETOOTH_HCI_USE_MCT                       := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/xiaomi/aries/bluetooth
 
 # Webkit
-#ENABLE_WEBGL := true
+ENABLE_WEBGL := true
 TARGET_FORCE_CPU_UPLOAD := true
 
 # Recovery
@@ -147,3 +149,8 @@ BOARD_LIB_DUMPSTATE := libdumpstate.aries
 
 -include vendor/xiaomi/aries/BoardConfigVendor.mk
 
+BOARD_SEPOLICY_DIRS += \
+    device/xiaomi/aries/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+    camera.te

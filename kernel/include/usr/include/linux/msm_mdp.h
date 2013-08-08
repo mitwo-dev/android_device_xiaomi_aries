@@ -623,20 +623,5 @@ enum {
 	MDP_WRITEBACK_MIRROR_RESUME,
 };
 
-#ifdef __KERNEL__
-
-/* get the framebuffer physical address information */
-int get_fb_phys_info(unsigned long *start, unsigned long *len, int fb_num,
-	int subsys_id);
-struct fb_info *msm_fb_get_writeback_fb(void);
-int msm_fb_writeback_init(struct fb_info *info);
-int msm_fb_writeback_start(struct fb_info *info);
-int msm_fb_writeback_queue_buffer(struct fb_info *info,
-		struct msmfb_data *data);
-int msm_fb_writeback_dequeue_buffer(struct fb_info *info,
-		struct msmfb_data *data);
-int msm_fb_writeback_stop(struct fb_info *info);
-int msm_fb_writeback_terminate(struct fb_info *info);
-#endif
 
 #endif /*_MSM_MDP_H_*/
