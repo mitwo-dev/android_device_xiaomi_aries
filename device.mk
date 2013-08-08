@@ -158,15 +158,19 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     e2fsck
 
+# QCOM Display
 PRODUCT_PACKAGES += \
     libgenlock \
+    libmemalloc \
     liboverlay \
+    libqdutils \
+    libtilerenderer \
+    libI420colorconvert \
     hwcomposer.msm8960 \
     gralloc.msm8960 \
-    copybit.msm8960 \
-    lights.msm8960 \
-    camera-wrapper.msm8960
+    copybit.msm8960
 
+# Audio
 PRODUCT_PACKAGES += \
     alsa.msm8960 \
     audio_policy.msm8960 \
@@ -174,28 +178,48 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
-    libaudio-resampler
+    libaudio-resampler \
+    tinymix
 
+# BT
 PRODUCT_PACKAGES += \
     hci_qcomm_init
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=smd
 
+# Omx
 PRODUCT_PACKAGES += \
-    libmm-omxcore \
-    libdivxdrmdecrypt \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxCore \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc \
     libOmxVdec \
     libOmxVenc \
-    libOmxCore \
-    libstagefrighthw \
-    libc2dcolorconvert
+    libc2dcolorconvert \
+    libdashplayer \
+    libdivxdrmdecrypt \
+    libmm-omxcore \
+    libstagefrighthw
+
+# Camera wrapper
+PRODUCT_PACKAGES += \
+    camera-wrapper.msm8960
+
+# Light
+PRODUCT_PACKAGES += \
+    lights.msm8960
 
 PRODUCT_PACKAGES += \
     libwfcu
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-qmi-1.so
+
+# QCOM
+PRODUCT_PROPERTY_OVERRIDES += \
+    com.qc.hardware=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     telephony.lteOnCdmaDevice=0
