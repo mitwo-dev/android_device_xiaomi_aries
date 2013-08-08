@@ -20,3 +20,7 @@ allow camera system_data_file:dir remove_name;
 file_type_auto_trans(camera, system_data_file, camera_data_file);
 allow camera camera_data_file:dir { write add_name };
 allow camera camera_data_file:file create_file_perms;
+
+# Connect to /data/app/sensor_ctl_socket
+unix_socket_connect(camera, sensors, sensors)
+allow camera sensors_socket:sock_file read;
