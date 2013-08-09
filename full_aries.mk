@@ -33,6 +33,8 @@ PRODUCT_RESTRICT_VENDOR_FILES := false
 ## VoiceProc modules                                                                                              
 PRODUCT_PACKAGES += voiceproc_init.img
 PRODUCT_PACKAGES += voiceproc.img
+PRODUCT_PACKAGES += wpa_supplicant_overlay.conf
+PRODUCT_PACKAGES += p2p_supplicant_overlay.conf
 
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/xiaomi/aries/device.mk)

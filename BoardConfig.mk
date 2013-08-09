@@ -39,7 +39,6 @@ TARGET_CPU_SMP             := true
 TARGET_CPU_VARIANT         := krait
 TARGET_ARCH                := arm
 TARGET_ARCH_VARIANT        := armv7-a-neon
-ARCH_ARM_HAVE_TLS_REGISTER := true
 BOARD_USES_QCOM_HARDWARE   := true
 
 # Krait optimizations
@@ -54,8 +53,12 @@ BOARD_KERNEL_BASE      := 0x80200000
 BOARD_KERNEL_PAGESIZE  := 2048
 BOARD_KERNEL_CMDLINE   := console=ttyHSL0,115200,n8 androidboot.hardware=aries ehci-hcd.park=3 maxcpus=2
 BOARD_MKBOOTIMG_ARGS   := --ramdisk_offset 0x02000000
-TARGET_PREBUILT_KERNEL := device/xiaomi/aries/kernel/kernel
 
+ifneq ($(BUILD_KERNEL),true)
+TARGET_PREBUILT_KERNEL := device/xiaomi/aries/kernel/kernel
+else
+TARGET_PREBUILT_KERNEL :=
+endif
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/xiaomi/aries
 
@@ -120,6 +123,8 @@ ENABLE_WEBGL := true
 TARGET_FORCE_CPU_UPLOAD := true
 
 # Recovery
+TARGET_RECOVERY_FSTAB            := device/xiaomi/aries/configs/fstab.aries
+RECOVERY_FSTAB_VERSION           := 2
 TARGET_RECOVERY_PIXEL_FORMAT     := "RGBX_8888"
 BOARD_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/graphics_en.c
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/xiaomi/aries/recovery/recovery_keys.c
@@ -142,3 +147,33 @@ BOARD_LIB_DUMPSTATE := libdumpstate.aries
 
 -include vendor/xiaomi/aries/BoardConfigVendor.mk
 
+BOARD_SEPOLICY_DIRS += \
+    device/xiaomi/aries/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+    file_contexts \
+    property_contexts \
+    te_macros \
+    bluetooth_loader.te \
+    bridge.te \
+    camera.te \
+    device.te \
+    dhcp.te \
+    domain.te \
+    drmserver.te \
+    file.te \
+    kickstart.te \
+    init.te \
+    mediaserver.te \
+    mpdecision.te \
+    netmgrd.te \
+    property.te \
+    qmux.te \
+    rild.te \
+    rmt.te \
+    surfaceflinger.te \
+    system.te \
+    tee.te \
+    thermald.te \
+    ueventd.te \
+    wpa_supplicant.te

@@ -33,10 +33,6 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/chargeonlymode:root/sbin/chargeonlymode
 
-# Vold and Storage
-PRODUCT_COPY_FILES += \
-    device/xiaomi/aries/configs/vold.fstab:system/etc/vold.fstab
-
 # Live Wallpapers
 PRODUCT_PACKAGES += \
     LiveWallpapers \
@@ -44,11 +40,19 @@ PRODUCT_PACKAGES += \
     VisualizationWallpapers \
     librs_jni
 
+# Charger
+PRODUCT_COPY_FILES += \
+    device/xiaomi/aries/libril.so:system/lib/libril.so
+
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     device/xiaomi/aries/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
-    device/xiaomi/aries/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
+    device/xiaomi/aries/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
+
+ifneq ($(BUILD_KERNEL),true)
+PRODUCT_COPY_FILES += \
     device/xiaomi/aries/kernel/wlan.ko:system/lib/modules/wlan.ko
+endif
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/snd_soc_msm_2x_Fusion3:system/etc/snd_soc_msm/snd_soc_msm_2x_Fusion3 \
@@ -77,8 +81,7 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
     device/xiaomi/aries/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
     device/xiaomi/aries/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
-    device/xiaomi/aries/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
-    device/xiaomi/aries/init.xiaomi.aries.wifi.sh:system/etc/init.xiaomi.aries.wifi.sh
+    device/xiaomi/aries/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/bootanimation.zip:system/media/bootanimation.zip
@@ -203,10 +206,6 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     libstagefrighthw
 
-# Camera wrapper
-PRODUCT_PACKAGES += \
-    camera-wrapper.msm8960
-
 # Light
 PRODUCT_PACKAGES += \
     lights.msm8960
@@ -250,27 +249,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
-# Debugging
-PRODUCT_PROPERTY_OVERRIDES += \
-    service.adb.enable=1 \
-    persist.service.adb.enable=1
-
 # Gps
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qmienabled=true
-    
-# save modem ramdump to sdcard
+
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.parsedump=1 \
-    persist.radio.ramdump_sdcard=0 \
-    persist.radio.ramdump_num=3
-
-
-# for bugmailer
-PRODUCT_PACKAGES += send_bug
-PRODUCT_COPY_FILES += \
-    system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
-    system/extras/bugmailer/send_bug:system/bin/send_bug
+    ro.build.selinux=1
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/mount_ext4.sh:system/bin/mount_ext4.sh
