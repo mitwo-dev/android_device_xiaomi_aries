@@ -101,6 +101,9 @@ BOARD_USES_SEPERATED_VOICE_SPEAKER      := true
 BOARD_AUDIO_CAF_LEGACY_INPUT_BUFFERSIZE := true
 BOARD_USES_LEGACY_ALSA_AUDIO            := true
 
+# RIL
+BOARD_PROVIDES_LIBRIL := true
+
 # GPS
 BOARD_HAVE_NEW_QC_GPS := true
 #The below will be needed if we ever want to build GPS HAL from source
