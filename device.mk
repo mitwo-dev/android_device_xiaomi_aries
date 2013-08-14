@@ -148,9 +148,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0
 
-#Upto 3 layers can go through overlays
-PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable=true
-
 PRODUCT_CHARACTERISTICS := nosdcard
 
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -219,10 +216,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-qmi-1.so
 
-# QCOM
-PRODUCT_PROPERTY_OVERRIDES += \
-    com.qc.hardware=true
-
 PRODUCT_PROPERTY_OVERRIDES += \
     telephony.lteOnCdmaDevice=0
 
@@ -245,10 +238,28 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # fuse sdcard
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.fuse_sdcard=true \
-    ro.hwui.text_cache_width=2048 \
-    ro.hwui.texture_cache_size=48
+    persist.fuse_sdcard=true
 
+# Qualcomm random numbers generated
+PRODUCT_PACKAGES += qrngd
+
+# QCOM Display
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.hw=1 \
+    debug.egl.hw=1 \
+    debug.composition.type=dyn \
+    persist.hwc.mdpcomp.enable=true \
+    debug.mdpcomp.logs=0
+
+# QC Perf
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=/system/lib/libqc-opt.so
+
+# QCOM
+PRODUCT_PROPERTY_OVERRIDES += \
+    com.qc.hardware=true
+
+# USB
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
