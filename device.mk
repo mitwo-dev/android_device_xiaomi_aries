@@ -118,8 +118,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/gps.conf:system/etc/gps.conf
 
+# OpenGL ES 3.0
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072
+    ro.opengles.version=196608
+
+# OpenGL ES 2.0
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.opengles.version=131072
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320
