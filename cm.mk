@@ -23,6 +23,5 @@ PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=aries BUILD_FINGERPRINT=Xiaomi/arie
 # Enable Torch
 PRODUCT_PACKAGES += Torch \
 		    Camera \
+		    -Gallery2 \
 		    Gallery
-
-PRODUCT_PACKAGES -= Gallery2
