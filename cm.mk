@@ -21,8 +21,8 @@ PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=aries BUILD_FINGERPRINT=Xiaomi/aries/aries:4.3/JSS15J/573038:user/release-keys PRIVATE_BUILD_DESC="aries-user 4.3 JSS15J 573038 release-keys" BUILD_NUMBER=JSS15J
 
 # Enable Torch
-PRODUCT_PACKAGES += Torch
-		    Camera
+PRODUCT_PACKAGES += Torch \
+		    Camera \
 		    Gallery
 
 PRODUCT_PACKAGES -= Gallery2
