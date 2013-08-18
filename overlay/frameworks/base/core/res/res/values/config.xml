@@ -248,4 +248,11 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">7</integer>
 
+    <string-array name="config_locationProviderPackageNames" translatable="false">
+        <!-- The standard AOSP fused location provider -->
+        <item>com.android.location.fused</item>
+        <!-- The Google provider -->
+        <item>com.google.android.location</item>
+    </string-array>
+
 </resources>
