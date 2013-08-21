@@ -89,7 +89,9 @@ TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 TARGET_USES_ION             := true
 USE_OPENGL_RENDERER         := true
 TARGET_USES_C2D_COMPOSITION := true
-TARGET_DISPLAY_INSECURE_MM_HEAP := true
+
+# Use retire fence from MDP driver
+TARGET_DISPLAY_USE_RETIRE_FENCE := true
 
 # Audio
 BOARD_USES_ALSA_AUDIO                   := true
