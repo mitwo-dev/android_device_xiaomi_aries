@@ -91,7 +91,9 @@ TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 TARGET_USES_ION             := true
 USE_OPENGL_RENDERER         := true
 TARGET_USES_C2D_COMPOSITION := true
-COMMON_GLOBAL_CFLAGS        += -DNEW_ION_API
+
+# Use retire fence from MDP driver
+TARGET_DISPLAY_USE_RETIRE_FENCE := true
 
 # Audio
 BOARD_USES_ALSA_AUDIO                   := true
@@ -111,7 +113,6 @@ BOARD_HAVE_NEW_QC_GPS := true
 #TARGET_NO_RPC := true
 
 # Camera
-TARGET_PROVIDES_CAMERA_HAL := true
 COMMON_GLOBAL_CFLAGS       += -DMR0_CAMERA_BLOB -DDISABLE_HW_ID_MATCH_CHECK -DQCOM_BSP_CAMERA_ABI_HACK -DQCOM_BSP
 
 # Bluetooth
@@ -121,7 +122,7 @@ BLUETOOTH_HCI_USE_MCT                       := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/xiaomi/aries/bluetooth
 
 # Webkit
-ENABLE_WEBGL := true
+ENABLE_WEBGL            := true
 TARGET_FORCE_CPU_UPLOAD := true
 
 # Recovery

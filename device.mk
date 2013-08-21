@@ -28,7 +28,6 @@ DEVICE_PACKAGE_OVERLAYS := device/xiaomi/aries/overlay
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-
 # Charger
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/chargeonlymode:root/sbin/chargeonlymode
