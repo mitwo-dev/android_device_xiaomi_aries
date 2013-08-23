@@ -23,9 +23,9 @@ PRODUCT_COPY_FILES := device/xiaomi/aries/configs/apns-conf.xml:system/etc/apns-
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-PRODUCT_NAME := full_aries
+PRODUCT_NAME := aries
 PRODUCT_DEVICE := aries
-PRODUCT_BRAND := Android
+PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := MI 2
 PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_RESTRICT_VENDOR_FILES := false

@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_aries.mk
+    $(LOCAL_DIR)/aries.mk
