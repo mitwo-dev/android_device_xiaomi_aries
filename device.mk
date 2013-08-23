@@ -39,9 +39,13 @@ PRODUCT_PACKAGES += \
     VisualizationWallpapers \
     librs_jni
 
-# Charger
+# RIL
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/libril.so:system/lib/libril.so
+
+# Xiaomi App Store
+PRODUCT_COPY_FILES += \
+    device/xiaomi/aries/libpatcher_jni.so:system/lib/libpatcher_jni.so
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \

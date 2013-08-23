@@ -58,6 +58,15 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := voiceproc.img
 LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/firmware
 include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE       := xm_app_store.apk
+LOCAL_MODULE_TAGS  := optional
+LOCAL_SRC_FILES    := xm_app_store.apk
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_MODULE_PATH  := $(TARGET_OUT)/app
+include $(BUILD_PREBUILT)
+
 endif
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
