@@ -37,6 +37,12 @@ PRODUCT_PACKAGES += wpa_supplicant_overlay.conf
 PRODUCT_PACKAGES += p2p_supplicant_overlay.conf
 PRODUCT_PACKAGES += xm_app_store.apk
 
+# GMS
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.clientidbase=android-xiaomi
+
+$(call inherit-product-if-exists, vendor/google/products/gms_aosp.mk)
+
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/xiaomi/aries/device.mk)
 $(call inherit-product-if-exists, vendor/xiaomi/aries/aries-vendor.mk)
