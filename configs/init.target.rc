@@ -36,12 +36,6 @@ on fs
     # these partition flashed on the device. Failure to mount any partition in fstab file
     # results in failure to launch late-start class.
 
-#    mount ext4 /dev/block/mmcblk0p23 /system wait ro barrier=1
-#    mount ext4 /dev/block/mmcblk0p26 /data relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
-#    mount ext4 /dev/block/mmcblk0p27 /storage_int
-#    mount ext4 /dev/block/mmcblk0p25 /cache relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
-#    mount ext4 /dev/block/mmcblk0p22 /persist relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc    
-
     wait /dev/block/platform/msm_sdcc.1/by-name/userdata
     exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/userdata /data
 
@@ -81,12 +75,6 @@ on post-fs-data
    mkdir /tombstones/wcnss 0771 system system
    mkdir /tombstones/dsps 0771 system system
 
-#start camera server as daemon
-service qcamerasvr /system/bin/mm-qcamera-daemon
-        class late_start
-        user camera
-        group camera system inet input graphics
-
 #start GNSS/Sensor interface daemon
 service gsiff_daemon /system/bin/gsiff_daemon
     class late_start
@@ -115,11 +103,6 @@ service ramdump_dsps2 /system/bin/logwrapper /system/bin/ramdump dsps2 /dev/ramd
    class late_start
    user system
    group system media_rw
-
-service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml
-   user system
-   group system
-   disabled
 
 service kickstart /system/bin/qcks -i /firmware/image/
     oneshot

@@ -54,7 +54,8 @@ PRODUCT_COPY_FILES += \
 
 ifneq ($(BUILD_KERNEL),true)
 PRODUCT_COPY_FILES += \
-    device/xiaomi/aries/kernel/wlan.ko:system/lib/modules/wlan.ko
+    device/xiaomi/aries/kernel/wlan.ko:system/lib/modules/wlan.ko \
+    device/xiaomi/aries/kernel/exfat.ko:system/lib/modules/exfat.ko
 endif
 
 PRODUCT_COPY_FILES += \
@@ -84,8 +85,7 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
     device/xiaomi/aries/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
     device/xiaomi/aries/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
-    device/xiaomi/aries/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
-    device/xiaomi/aries/init.xiaomi.aries.wifi.sh:system/etc/init.xiaomi.aries.wifi.sh
+    device/xiaomi/aries/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/bootanimation.zip:system/media/bootanimation.zip
