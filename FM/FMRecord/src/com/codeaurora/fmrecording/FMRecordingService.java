@@ -64,6 +64,9 @@ import android.R.layout;
 import android.R.drawable;
 import android.content.ComponentName;
 import android.content.res.Resources;
+import android.os.Process;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 
 public class FMRecordingService extends Service {
     private static final String TAG     = "FMRecordingService";
@@ -86,6 +89,10 @@ public class FMRecordingService extends Service {
     static final int START = 1;
     static final int STOP = 0;
     private int mRecordDuration = -1;
+    private Thread mStatusCheckThread = null;
+    private int clientPid = -1;
+    private String clientProcessName = "";
+
     public void onCreate() {
 
         super.onCreate();
@@ -319,6 +326,7 @@ public class FMRecordingService extends Service {
         sendRecordingStatusIntent(STOP);
         saveFile();
         stopForeground(true);
+        stopClientStatusCheck();
     }
 
     private void saveFile() {
@@ -464,11 +472,15 @@ public class FMRecordingService extends Service {
                      Log.d(TAG, " action = " +action);
                      if (action.equals(ACTION_FM_RECORDING)) {
                          int state = intent.getIntExtra("state", STOP);
-                         Log.d(TAG, "ACTION_FM_RECORDING Intent received" +state);
+                         Log.d(TAG, "ACTION_FM_RECORDING Intent received" + state);
                          if (state == START) {
                              Log.d(TAG, "Recording start");
                              mRecordDuration = intent.getIntExtra("record_duration", mRecordDuration);
-                             startRecord();
+                             if(startRecord()) {
+                                clientProcessName = intent.getStringExtra("process_name");
+                                clientPid = intent.getIntExtra("process_id", -1);
+                                startClientStatusCheck();
+                             }
                          } else if (state == STOP) {
                              Log.d(TAG, "Stop recording");
                              stopRecord();
@@ -481,5 +493,63 @@ public class FMRecordingService extends Service {
             registerReceiver(mFmRecordingReceiver, iFilter);
         }
     }
+
+    private boolean getClientStatus(int pid, String processName) {
+      boolean status = false;
+      ActivityManager actvityManager =
+                    (ActivityManager)this.getSystemService(
+                                                           this.ACTIVITY_SERVICE);
+
+      List<RunningAppProcessInfo> procInfos =
+                                     actvityManager.getRunningAppProcesses();
+
+      for(RunningAppProcessInfo procInfo : procInfos) {
+         if ((pid == procInfo.pid)
+               &&
+              (procInfo.processName.equals(processName))) {
+              status = true;
+              break;
+         }
+      }
+      procInfos.clear();
+      return status;
+    }
+
+    private Runnable clientStatusCheckThread = new Runnable() {
+       @Override
+       public void run() {
+          while(!Thread.currentThread().isInterrupted()) {
+                try {
+                     if(!getClientStatus(clientPid, clientProcessName)) {
+                        stopRecord();
+                        break;
+                     };
+                     Thread.sleep(500);
+                }catch(Exception e) {
+                     Log.d(TAG, "Client status check thread interrupted");
+                     break;
+                }
+          }
+       }
+    };
+
+   private void startClientStatusCheck() {
+       if((mStatusCheckThread == null) ||
+          (mStatusCheckThread.getState() == Thread.State.TERMINATED)) {
+           mStatusCheckThread = new Thread(null,
+                                           clientStatusCheckThread,
+                                           "GetClientStatus");
+       }
+       if((mStatusCheckThread != null) &&
+          (mStatusCheckThread.getState() == Thread.State.NEW)) {
+           mStatusCheckThread.start();
+       }
+   }
+
+   private void stopClientStatusCheck() {
+       if(mStatusCheckThread != null) {
+          mStatusCheckThread.interrupt();
+       }
+   }
 
 }
