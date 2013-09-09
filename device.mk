@@ -163,6 +163,9 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_PACKAGES += \
     Updater
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.product.mod_device=mi2_ivan
+
 PRODUCT_PACKAGES += \
     librs_jni \
     com.android.future.usb.accessory
