@@ -410,7 +410,11 @@ public class FMRadio extends Activity
            displayValues[i] = String.valueOf((min + i * step) / 1000.0f);
        }
        mPicker.setDisplayedValues(displayValues, true);
-       mPicker.setWrapSelectorWheel(true);
+       try {
+           mPicker.setWrapSelectorWheel(true);
+       } catch (IllegalStateException e) {
+           e.printStackTrace();
+       }
        mPicker.invalidate();
    }
    protected int valueToFrequency(int value) {

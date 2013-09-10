@@ -1487,6 +1487,7 @@ public class HorizontalNumberPicker extends LinearLayout {
         int[] selectorIndices = mSelectorIndices;
         for (int i = 0; i < selectorIndices.length; i++) {
             int selectorIndex = selectorIndices[i];
+            float fNumber = 0;
             String scrollSelectorValue = mSelectorIndexToStringCache
                     .get(selectorIndex);
                 if(i - mSelectorMiddleItemIndex > 0 ){
@@ -1499,7 +1500,11 @@ public class HorizontalNumberPicker extends LinearLayout {
                     mSelectorWheelPaint.setColor(Color.RED);
                     mSelectorWheelPaint.setAlpha(SELECTOR_TEXT_ALPHA_TRANSPARENT_NONE);
                 }
-                float fNumber = Float.valueOf(scrollSelectorValue).floatValue();
+                try {
+                    fNumber = Float.valueOf(scrollSelectorValue).floatValue();
+                } catch(NumberFormatException e) {
+                    e.printStackTrace();
+                }
 
                 boolean bShowNumber = false;
                 float fWidthOfScale = mScaleWidth ;
