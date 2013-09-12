@@ -71,5 +71,6 @@ interface IFMRadioService
     int getAfJmpRmssiSamplesCnt();
     boolean setRxRepeatCount(int count);
     long getRecordingStartTime();
+    boolean isSleepTimerActive();
 }
 

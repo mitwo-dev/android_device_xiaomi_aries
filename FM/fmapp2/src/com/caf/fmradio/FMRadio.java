@@ -387,20 +387,6 @@ public class FMRadio extends Activity
       if ((mERadioTextScroller == null) && (mERadioTextTV != null)) {
           mERadioTextScroller = new ScrollerText(mERadioTextTV);
       }
-
-
-      //HDMI and FM concurrecny is not supported.
-      if (isHdmiOn()) {
-          showDialog(DIALOG_CMD_FAILED_HDMI_ON);
-      }
-      else {
-         if (false == bindToService(this, osc)) {
-             Log.d(LOGTAG, "onCreate: Failed to Start Service");
-         } else {
-             Log.d(LOGTAG, "onCreate: Start Service completed successfully");
-         }
-         registerFMSettingListner();
-      }
    }
 
    protected void setDisplayvalue(){
@@ -450,18 +436,7 @@ public class FMRadio extends Activity
    public void onStop() {
       Log.d(LOGTAG, "FMRadio: onStop");
       if(isSleepTimerActive()) {
-          mSleepUpdateHandlerThread.interrupt();
-          long timeNow = ((SystemClock.elapsedRealtime()));
-          if (timeNow < mSleepAtPhoneTime) {
-              try {
-                if (null != mService) {
-                    mService.delayedStop((mSleepAtPhoneTime - timeNow),
-                                               FMRadioService.STOP_SERVICE);
-                }
-              }catch (Exception e) {
-                e.printStackTrace();
-              }
-          }
+         mSleepUpdateHandlerThread.interrupt();
       }
       if(isRecording()) {
           try {
@@ -479,36 +454,16 @@ public class FMRadio extends Activity
    public void onStart() {
       super.onStart();
       Log.d(LOGTAG, "FMRadio: onStart");
-      try {
-         if(mService != null) {
-            mService.registerCallbacks(mServiceCallbacks);
+      if (isHdmiOn()) {
+          showDialog(DIALOG_CMD_FAILED_HDMI_ON);
+      }
+      else {
+         if ((mService == null ) && (false == bindToService(this, osc))) {
+             Log.d(LOGTAG, "onStart: Failed to Start Service");
+         } else {
+             Log.d(LOGTAG, "onStart: Start Service completed successfully");
          }
-      }catch (RemoteException e) {
-         e.printStackTrace();
-      }
-      if(isSleepTimerActive()) {
-          Log.d(LOGTAG, "isSleepTimerActive is true");
-          try {
-            if (null != mService) {
-                mService.cancelDelayedStop(FMRadioService.STOP_SERVICE);
-            }
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
-          initiateSleepThread();
-      }
-      if(isRecording()) {
-          Log.d(LOGTAG,"isRecordTimerActive is true");
-          try {
-            if (null != mService) {
-                mService.cancelDelayedStop(FMRadioService.STOP_RECORD);
-            }
-          }catch (Exception e) {
-            e.printStackTrace();
-          }
-          if(isRecording()) {
-              initiateRecordThread();
-          }
+         registerFMSettingListner();
       }
       mPrefs.Load();
       if (mPicker != null) {
@@ -535,6 +490,40 @@ public class FMRadio extends Activity
    @Override
    public void onResume() {
       super.onResume();
+      try {
+         if(mService != null) {
+            mService.registerCallbacks(mServiceCallbacks);
+         }
+      }catch (RemoteException e) {
+         e.printStackTrace();
+      }
+      if(isSleepTimerActive()) {
+          Log.d(LOGTAG, "isSleepTimerActive is true");
+          try {
+               if(null != mService) {
+                  mService.cancelDelayedStop(FMRadioService.STOP_SERVICE);
+               }
+               if(null != mSleepUpdateHandlerThread) {
+                  mSleepUpdateHandlerThread.interrupt();
+               }
+          }catch (Exception e) {
+               e.printStackTrace();
+          }
+          initiateSleepThread();
+      }
+      if(isRecording()) {
+          Log.d(LOGTAG,"isRecordTimerActive is true");
+          try {
+            if (null != mService) {
+                mService.cancelDelayedStop(FMRadioService.STOP_RECORD);
+            }
+          }catch (Exception e) {
+            e.printStackTrace();
+          }
+          if(isRecording()) {
+              initiateRecordThread();
+          }
+      }
       Log.d(LOGTAG, "FMRadio: onResume");
       mStereo = FmSharedPreferences.getLastAudioMode();
       mHandler.post(mUpdateProgramService);
@@ -2305,13 +2294,33 @@ public class FMRadio extends Activity
                                                 "SleepUpdateThread");
       }
       /* If the thread state is "new" then the thread has not yet started */
-      if (mSleepUpdateHandlerThread.getState() == Thread.State.NEW) {
-         mSleepUpdateHandlerThread.start();
+      if(mSleepUpdateHandlerThread.getState() == Thread.State.NEW && isFmOn()) {
+          try {
+              if((mService != null) &&
+                 !mService.isSleepTimerActive()) {
+                 long timeNow = ((SystemClock.elapsedRealtime()));
+                 if(timeNow < mSleepAtPhoneTime) {
+                    mService.delayedStop((mSleepAtPhoneTime - timeNow),
+                                            FMRadioService.STOP_SERVICE);
+                 }
+              }
+              mSleepUpdateHandlerThread.start();
+          }catch(Exception e) {
+              e.printStackTrace();
+          }
       }
    }
 
    private void endSleepTimer() {
       mSleepAtPhoneTime = 0;
+      try {
+           if(mService != null) {
+              mService.cancelDelayedStop(FMRadioService.STOP_SERVICE);
+           }
+      }catch(RemoteException e) {
+           e.printStackTrace();
+      }
+
       if(null != mSleepUpdateHandlerThread) {
          mSleepUpdateHandlerThread.interrupt();
       }
@@ -2333,8 +2342,16 @@ public class FMRadio extends Activity
 
    private boolean isSleepTimerActive() {
       boolean active = false;
-      if (mSleepAtPhoneTime > 0) {
-          active = true;
+      try {
+          if((mService != null)
+             && (mService.isSleepTimerActive())
+             && (mSleepAtPhoneTime > 0)) {
+             active = true;
+             Log.d(LOGTAG, "Sleeptimer is active");
+          }else {
+          }
+      }catch(RemoteException e) {
+          e.printStackTrace();
       }
       return active;
    }
@@ -2407,6 +2424,7 @@ public class FMRadio extends Activity
                 Thread.sleep(500);
                 Message statusUpdate = new Message();
                 statusUpdate.what = SLEEPTIMER_UPDATE;
+                Log.d(LOGTAG, "SLEEP TIMER UPDATE");
                 mUIUpdateHandlerHandler.sendMessage(statusUpdate);
                 sleepTimerExpired = hasSleepTimerExpired();
             }catch (Exception ex) {
@@ -2901,6 +2919,7 @@ public class FMRadio extends Activity
             mCallback.onServiceDisconnected(className);
          }
          sService = null;
+         mService = null;
       }
    }
 
@@ -2924,6 +2943,9 @@ public class FMRadio extends Activity
             if (isRecording()) {
                 initiateRecordThread();
             }
+            if(isSleepTimerActive()) {
+               initiateSleepThread();
+            }
             return;
          }else {
             Log.e(LOGTAG, "IFMRadioService onServiceConnected failed");
@@ -2937,6 +2959,10 @@ public class FMRadio extends Activity
          finish();
       }
       public void onServiceDisconnected(ComponentName classname) {
+         Log.d(LOGTAG, "Service got disconnected");
+         unbindFromService(FMRadio.this);
+         mService = null;
+         sService = null;
       }
    };
 
