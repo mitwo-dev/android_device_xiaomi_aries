@@ -726,8 +726,13 @@ public class FMRadioService extends Service
        if ( true == mPlaybackInProgress ) // no need to resend event
            return;
        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-       audioManager.requestAudioFocus(mAudioFocusListener, AudioManager.STREAM_MUSIC,
+       int granted = audioManager.requestAudioFocus(mAudioFocusListener, AudioManager.STREAM_MUSIC,
               AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+       if(granted != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+          Log.d(LOGTAG, "audio focuss couldnot be granted");
+          return;
+       }
+
        Log.d(LOGTAG,"FM registering for registerMediaButtonEventReceiver");
        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
        ComponentName fmRadio = new ComponentName(this.getPackageName(),
