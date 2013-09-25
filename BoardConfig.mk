@@ -140,5 +140,16 @@ BOARD_USES_SECURE_SERVICES := true
 
 BOARD_LIB_DUMPSTATE := libdumpstate.aries
 
+#TWRP config:
+DEVICE_RESOLUTION := 720x1280
+TW_INTERNAL_STORAGE_PATH := "/sdcard"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+TW_EXTERNAL_STORAGE_PATH := "/usb-otg"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "usb-otg"
+#TW_CUSTOM_POWER_BUTTON := 107
+TW_BRIGHTNESS_PATH := /sys/devices/platform/msm_fb.591873/leds/lcd-backlight/brightness
+TW_MAX_BRIGHTNESS := 255
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+
 -include vendor/xiaomi/aries/BoardConfigVendor.mk
 
