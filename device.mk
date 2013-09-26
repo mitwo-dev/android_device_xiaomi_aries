@@ -54,8 +54,21 @@ PRODUCT_COPY_FILES += \
 
 ifneq ($(BUILD_KERNEL),true)
 PRODUCT_COPY_FILES += \
-    device/xiaomi/aries/kernel/wlan.ko:system/lib/modules/wlan.ko \
-    device/xiaomi/aries/kernel/exfat.ko:system/lib/modules/exfat.ko
+    device/xiaomi/aries/kernel/adsprpc.ko:system/lib/modules/adsprpc.ko \
+    device/xiaomi/aries/kernel/bluetooth-power.ko:system/lib/modules/bluetooth-power.ko \
+    device/xiaomi/aries/kernel/eeprom_93cx6.ko:system/lib/modules/eeprom_93cx6.ko \
+    device/xiaomi/aries/kernel/evbug.ko:system/lib/modules/evbug.ko \
+    device/xiaomi/aries/kernel/exfat.ko:system/lib/modules/exfat.ko \
+    device/xiaomi/aries/kernel/gspca_main.ko:system/lib/modules/gspca_main.ko \
+    device/xiaomi/aries/kernel/ks8851.ko:system/lib/modules/ks8851.ko \
+    device/xiaomi/aries/kernel/lcd.ko:system/lib/modules/lcd.ko \
+    device/xiaomi/aries/kernel/mmc_test.ko:system/lib/modules/mmc_test.ko \
+    device/xiaomi/aries/kernel/msm-buspm-dev.ko:system/lib/modules/msm-buspm-dev.ko \
+    device/xiaomi/aries/kernel/radio-iris-transport.ko:system/lib/modules/radio-iris-transport.ko \
+    device/xiaomi/aries/kernel/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
+    device/xiaomi/aries/kernel/spidev.ko:system/lib/modules/spidev.ko \
+    device/xiaomi/aries/kernel/test-iosched.ko:system/lib/modules/test-iosched.ko \
+    device/xiaomi/aries/kernel/wlan.ko:system/lib/modules/wlan.ko
 endif
 
 PRODUCT_COPY_FILES += \
