@@ -241,7 +241,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     telephony.lteOnCdmaDevice=0 \
-    ril.subscription.types=NV,RUIM
+    ril.subscription.types=NV,RUIM \
+    ro.cdma.home.operator.numeric=46003
 
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
