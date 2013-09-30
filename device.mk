@@ -103,7 +103,7 @@ PRODUCT_COPY_FILES += \
 # Prebuilt kl and kcm keymaps
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/atmel_mxt_ts.kl:system/usr/keylayout/atmel_mxt_ts.kl \
-    device/xiaomi/aries/Button_Jack.kl:system/usr/keylayout/Button_Jack.kl \
+    device/xiaomi/aries/apq8064-tabla-snd-card_Button_Jack.kl:system/usr/keylayout/apq8064-tabla-snd-card_Button_Jack.kl \
     device/xiaomi/aries/cyttsp-i2c.kl:system/usr/keylayout/cyttsp-i2c.kl \
     device/xiaomi/aries/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
     device/xiaomi/aries/keypad_8960.kl:system/usr/keylayout/keypad_8960.kl \
