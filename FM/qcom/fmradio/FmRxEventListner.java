@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009,2012, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2009,2012-2013, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -104,16 +104,26 @@ class FmRxEventListner {
                             case 1:
                                 Log.d(TAG, "Got TUNE_EVENT");
                                 freq = FmReceiverJNI.getFreqNative(fd);
-                                if (freq > 0)
-                                    cb.FmRxEvRadioTuneStatus(freq);
-                                else
-                                    Log.e(TAG, "get frequency command failed");
+                                state = FmReceiver.getSearchState();
+                                switch(state) {
+                                   case FmTransceiver.subSrchLevel_SeekInPrg :
+                                        Log.v(TAG, "Current state is " + state);
+                                        FmReceiver.setSearchState(FmTransceiver.subSrchLevel_SrchComplete);
+                                        Log.v(TAG, "RxEvtList: CURRENT-STATE : Search ---> NEW-STATE : FMRxOn");
+                                        cb.FmRxEvSearchComplete(freq);
+                                        break;
+                                   default:
+                                        if (freq > 0)
+                                            cb.FmRxEvRadioTuneStatus(freq);
+                                        else
+                                            Log.e(TAG, "get frequency command failed");
+                                        break;
+                                }
                                 break;
                             case 2:
                                 Log.d(TAG, "Got SEEK_COMPLETE_EVENT");
                                 state = FmReceiver.getSearchState();
                                 switch(state) {
-                                   case FmTransceiver.subSrchLevel_SeekInPrg :
                                    case FmTransceiver.subSrchLevel_ScanInProg:
                                       Log.v(TAG, "Current state is " + state);
                                       FmReceiver.setSearchState(FmTransceiver.subSrchLevel_SrchComplete);

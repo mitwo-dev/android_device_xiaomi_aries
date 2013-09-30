@@ -39,7 +39,7 @@ import android.os.SystemProperties;
 public class FmReceiver extends FmTransceiver
 {
 
-   public static int mSearchState = 0;
+   public static int mSearchState = subSrchLevel_NoSearch;
 
    static final int STD_BUF_SIZE = 256;
    static final int GRP_3A = 64;
@@ -630,7 +630,13 @@ public class FmReceiver extends FmTransceiver
             break;
          case subSrchLevel_SrchComplete:
             /* Update the state of the FM device */
+            mSearchState = subSrchLevel_NoSearch;
             setFMPowerState(FMState_Rx_Turned_On);
+            break;
+         case subSrchLevel_SrchAbort:
+            break;
+         default:
+            mSearchState = subSrchLevel_NoSearch;
             break;
       }
    }

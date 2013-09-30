@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2009-2013, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -57,6 +57,7 @@ public class FmTransceiver
     * These are the sub-levels of FM Search operations : seek/scan/auto-preset.
     * Used internally for distinguishing between the various search operations.
    */
+   public static final int subSrchLevel_NoSearch       = -1;
    public static final int subSrchLevel_SeekInPrg      = 0;
    public static final int subSrchLevel_ScanInProg     = 1;
    public static final int subSrchLevel_SrchListInProg = 2;
