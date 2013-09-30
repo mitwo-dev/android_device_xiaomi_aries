@@ -88,9 +88,6 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
     device/xiaomi/aries/configs/media_profiles.xml:system/etc/media_profiles.xml \
     device/xiaomi/aries/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    device/xiaomi/aries/configs/init.target.rc:root/init.target.rc \
-    device/xiaomi/aries/configs/init.aries.syspart_system.rc:root/init.aries.syspart_system.rc \
-    device/xiaomi/aries/configs/init.aries.syspart_system1.rc:root/init.aries.syspart_system1.rc \
     device/xiaomi/aries/configs/init.qcom.usb.sh:root/init.qcom.usb.sh
 
 PRODUCT_COPY_FILES += \
@@ -291,6 +288,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # Gps
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qmienabled=true
+
+# Dual boot init
+PRODUCT_PACKAGES += \
+  dualboot_init
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.selinux=1
