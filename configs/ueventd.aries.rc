@@ -107,8 +107,8 @@
 /dev/block/mmcblk0p16     0600   system     system
 /dev/block/mmcblk0p14     0600   system     system
 /dev/msm_dsps             0600   system     system
-/dev/ks_bridge            0600   system     system
-/dev/efs_bridge           0600   system     system
+/dev/ks_hsic_bridge       0660   system     system
+/dev/efs_hsic_bridge      0660   system     system
 
 /sys/devices/system/cpu/cpufreq ondemand/boostfreq   0664    system  system
 /sys/devices/system/cpu/cpufreq ondemand/boostpulse  0664    system  system
