@@ -258,10 +258,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sensors.wl_dis=true
 
-# fuse sdcard
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.fuse_sdcard=true
-
 # Qualcomm random numbers generated
 PRODUCT_PACKAGES += qrngd
 

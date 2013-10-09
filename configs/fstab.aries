@@ -17,6 +17,5 @@
 /dev/block/platform/msm_sdcc.1/by-name/tz           /tz             emmc    defaults                                                        defaults
 /dev/block/platform/msm_sdcc.1/by-name/rpm          /rpm            emmc    defaults                                                        defaults
 /dev/block/platform/msm_sdcc.1/by-name/aboot        /aboot          emmc    defaults                                                        defaults
-/dev/block/platform/msm_sdcc.1/by-name/storage      /storage_int    ext4    noatime,nosuid,nodev,barrier=1,data=ordered,noauto_da_alloc     wait,check
-/devices/platform/msm_sdcc.1/mmc_host               /storage/sdcard0 auto   defaults                                                        voldmanaged=sdcard:auto
+/devices/platform/msm_sdcc.1/mmc_host/mmc0        /storage/sdcard0  ext4    defaults                                                     voldmanaged=int_sdcard:27,nonremovable
 /devices/platform/msm_hsusb_host/usb2               /storage/usbdisk auto   defaults                                                        voldmanaged=usbdisk:auto

@@ -34,6 +34,7 @@ on early-init
     symlink /data/tombstones /tombstones
 
 on init
+    mkdir /storage 0775 system system
     mkdir /storage/sdcard0 0775 system system
     mkdir /storage/usbdisk 0775 system system
     mkdir /storage_int 0775 media_rw media_rw
@@ -41,6 +42,7 @@ on init
     export EXTERNAL_STORAGE /storage/sdcard0
 
     symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /storage_int
     symlink /storage/sdcard0 /mnt/sdcard
     symlink /storage/usbdisk /usbdisk
     symlink /storage/usbdisk /mnt/usbdisk
@@ -192,7 +194,6 @@ on boot
     # connections on high-throughput links get dropped when
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
-    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
 
     chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
@@ -741,15 +742,6 @@ service profiler_daemon /system/bin/profiler_daemon
     user root
     group root
     disabled
-
-service sdcard /system/bin/sdcard /storage_int /storage/sdcard0 1023 1023
-    class late_start
-
-on property:ro.fuse_sdcard=true
-    start sdcard
-
-on property:vold.decrypt=trigger_restart_framework
-    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
 
 service hcidump /system/bin/sh /system/etc/hcidump.sh
     user bluetooth
