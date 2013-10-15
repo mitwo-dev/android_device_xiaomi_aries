@@ -16,10 +16,6 @@
 
 LOCAL_PATH := $(cal my-dir)
 
-TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/aries/include
-
-PRODUCT_VENDOR_KERNEL_HEADERS := device/xiaomi/aries/kernel-headers
-
 TARGET_NO_RADIOIMAGE := true
 TARGET_NO_BOOTLOADER := true
 
