@@ -35,7 +35,7 @@ PRODUCT_PACKAGES += voiceproc_init.img
 PRODUCT_PACKAGES += voiceproc.img
 PRODUCT_PACKAGES += wpa_supplicant_overlay.conf
 PRODUCT_PACKAGES += p2p_supplicant_overlay.conf
-PRODUCT_PACKAGES += xm_app_store.apk
+PRODUCT_PACKAGES += MiMarket.apk
 
 # GMS
 PRODUCT_PROPERTY_OVERRIDES += \
