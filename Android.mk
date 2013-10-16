@@ -60,9 +60,9 @@ LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/firmware
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE       := xm_app_store.apk
+LOCAL_MODULE       := MiMarket.apk
 LOCAL_MODULE_TAGS  := optional
-LOCAL_SRC_FILES    := xm_app_store.apk
+LOCAL_SRC_FILES    := MiMarket.apk
 LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_MODULE_PATH  := $(TARGET_OUT)/app
 include $(BUILD_PREBUILT)
