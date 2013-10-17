@@ -73,6 +73,10 @@ WIFI_DRIVER_MODULE_NAME          := "wlan"
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_AP           := "ap"
 
+# FM
+COMMON_GLOBAL_CFLAGS += -DQCOM_FM_ENABLED
+QCOM_FM_ENABLED := true
+
 BOARD_EGL_CFG := device/xiaomi/aries/configs/egl.cfg
 
 TARGET_QCOM_MEDIA_VARIANT   := caf

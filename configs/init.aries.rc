@@ -49,6 +49,7 @@ on init
     
     # Set permissions for persist partition
     mkdir /persist 0771 system system
+    export BOOTCLASSPATH ${BOOTCLASSPATH}:/system/framework/qcom.fmradio.jar
 
 on fs
     exec /sbin/dualboot_init ./fstab.aries
