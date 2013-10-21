@@ -76,6 +76,7 @@ WIFI_DRIVER_FW_PATH_AP           := "ap"
 # FM
 COMMON_GLOBAL_CFLAGS += -DQCOM_FM_ENABLED
 QCOM_FM_ENABLED := true
+TARGET_ADDITIONAL_BOOTCLASSPATH := qcom.fmradio
 
 BOARD_EGL_CFG := device/xiaomi/aries/configs/egl.cfg
 
