@@ -265,7 +265,7 @@ static void** font_data;
 #include <sys/time.h>
 
 
-int gr_text(int x, int y, const char *s)
+int gr_text(int x, int y, const char *s, int bold)
 {
     GGLContext *gl = gr_context;
     GRFont *gfont = gr_font;
