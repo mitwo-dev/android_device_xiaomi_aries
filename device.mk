@@ -61,7 +61,8 @@ endif
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/snd_soc_msm_2x_Fusion3:system/etc/snd_soc_msm/snd_soc_msm_2x_Fusion3 \
-    device/xiaomi/aries/configs/audio_policy.conf:system/etc/audio_policy.conf
+    device/xiaomi/aries/configs/audio_policy.conf:system/etc/audio_policy.conf \
+    device/xiaomi/aries/configs/audio_effects.conf:system/etc/audio_effects.conf
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/thermald-aries.conf:system/etc/thermald.conf
