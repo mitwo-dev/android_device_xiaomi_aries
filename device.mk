@@ -76,7 +76,8 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
     device/xiaomi/aries/configs/media_profiles.xml:system/etc/media_profiles.xml \
     device/xiaomi/aries/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    device/xiaomi/aries/configs/init.qcom.usb.sh:root/init.qcom.usb.sh
+    device/xiaomi/aries/configs/init.qcom.usb.sh:root/init.qcom.usb.sh \
+    device/xiaomi/aries/configs/init.qcom.sh:root/init.qcom.sh
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \

@@ -328,21 +328,6 @@ on post-fs-data
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
 
-    #Create directory used by sensor subsystem(dsps)
-    mkdir /data/system/sensors
-    touch /data/system/sensors/settings
-    chmod 775 /data/system/sensors
-    write /data/system/sensors/settings 1
-    chmod 664 /data/system/sensors/settings
-    chown system /data/system/sensors/settings
-
-    mkdir /data/misc/sensors
-    chmod 775 /data/misc/sensors
-    mkdir /persist/misc/sensors
-    chmod 775 /persist/misc/sensors
-
-    start sensors
-
     #Create directories for wiper services
     mkdir /data/wpstiles/ 0755 shell
     mkdir /data/wiper 0755 gps qcom_oncrpc
