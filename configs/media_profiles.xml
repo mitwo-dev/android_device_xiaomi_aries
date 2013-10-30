@@ -90,7 +90,7 @@
 -->
 <MediaSettings>
     <!-- Each camcorder profile defines a set of predefined configuration parameters -->
-    <CamcorderProfiles cameraId="0" startOffsetMs="300" >
+    <CamcorderProfiles cameraId="0" >
         <!--
         Profiles for the back camera
         -->
@@ -208,7 +208,7 @@
 
     </CamcorderProfiles>
 
-    <CamcorderProfiles cameraId="1" startOffsetMs="300">
+    <CamcorderProfiles cameraId="1" >
         <!--
         Profiles for the front camera
         -->
