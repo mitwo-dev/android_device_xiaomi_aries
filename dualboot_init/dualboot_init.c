@@ -146,7 +146,7 @@ void check_fs(char *blk_device, char *fs_type, char *target)
         INFO("Running %s on %s\n", E2FSCK_BIN, blk_device);
 
         ret = android_fork_execvp_ext(ARRAY_SIZE(e2fsck_argv), e2fsck_argv,
-                                      &status, true, LOG_KLOG, true);
+                                      &status, true, LOG_KLOG, true, NULL);
 
         if (ret < 0) {
             /* No need to check for error in fork, we can't really handle it now */
@@ -295,7 +295,7 @@ int main(int argc, char **argv)
                 v->blk_device,
                 v->mount_point
             };
-            ret = android_fork_execvp_ext(ARRAY_SIZE(e2fsck_argv), e2fsck_argv, &status, true, LOG_KLOG, true);
+            ret = android_fork_execvp_ext(ARRAY_SIZE(e2fsck_argv), e2fsck_argv, &status, true, LOG_KLOG, true, NULL);
         }
         else {
             ret = mount(v->blk_device, v->mount_point,  v->fs_type, v->flags, v->fs_options);
