@@ -19,5 +19,5 @@
 
 #define BTM_DEF_LOCAL_NAME   "Xiaomi MI-2"
 #define BTA_DISABLE_DELAY 1000 /* in milliseconds */
-
+#define BTA_HOST_INTERLEAVE_SEARCH TRUE
 #endif
