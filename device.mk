@@ -162,7 +162,8 @@ PRODUCT_CHARACTERISTICS := nosdcard
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_PACKAGES += \
-    Updater
+    Updater \
+    Launcher3
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.mod_device=mi2_ivan
@@ -173,7 +174,9 @@ PRODUCT_PACKAGES += \
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
-    e2fsck
+    make_ext4fs \
+    e2fsck \
+    setup_fs
 
 # QCOM Display
 PRODUCT_PACKAGES += \
@@ -185,7 +188,8 @@ PRODUCT_PACKAGES += \
     libI420colorconvert \
     hwcomposer.msm8960 \
     gralloc.msm8960 \
-    copybit.msm8960
+    copybit.msm8960 \
+    memtrack.msm8960
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -241,7 +245,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     telephony.lteOnCdmaDevice=0 \
     ril.subscription.types=NV,RUIM \
-    ro.cdma.home.operator.numeric=46003
+    ro.cdma.home.operator.numeric=46003 \
+    persist.omh.enabled=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true

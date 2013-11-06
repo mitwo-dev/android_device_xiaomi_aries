@@ -6,7 +6,7 @@
 /dev/block/platform/msm_sdcc.1/by-name/cache        /cache          ext4    noatime,nosuid,nodev,barrier=1,data=ordered                     wait,check
 /dev/block/platform/msm_sdcc.1/by-name/userdata     /data           ext4    noatime,nosuid,nodev,barrier=1,data=ordered,noauto_da_alloc     wait,check
 /dev/block/platform/msm_sdcc.1/by-name/persist      /persist        ext4    nosuid,nodev,barrier=1,data=ordered,nodelalloc                  wait
-/dev/block/platform/msm_sdcc.1/by-name/modem        /firmware       vfat    ro,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:radio_efs_file:s0  wait
+/dev/block/platform/msm_sdcc.1/by-name/modem        /firmware       vfat    ro,uid=1000,shortname=lower,gid=1000,dmask=227,fmask=337                        wait
 /dev/block/platform/msm_sdcc.1/by-name/boot         /boot           emmc    defaults                                                        defaults
 /dev/block/platform/msm_sdcc.1/by-name/recovery     /recovery       emmc    defaults                                                        defaults
 /dev/block/platform/msm_sdcc.1/by-name/misc         /misc           emmc    defaults                                                        defaults
@@ -17,5 +17,5 @@
 /dev/block/platform/msm_sdcc.1/by-name/tz           /tz             emmc    defaults                                                        defaults
 /dev/block/platform/msm_sdcc.1/by-name/rpm          /rpm            emmc    defaults                                                        defaults
 /dev/block/platform/msm_sdcc.1/by-name/aboot        /aboot          emmc    defaults                                                        defaults
-/devices/platform/msm_sdcc.1/mmc_host/mmc0        /storage/sdcard0  ext4    defaults                                                     voldmanaged=int_sdcard:27,nonremovable
-/devices/platform/msm_hsusb_host/usb2               /storage/usbdisk auto   defaults                                                        voldmanaged=usbdisk:auto
+/devices/platform/msm_sdcc.1/mmc_host             /storage/sdcard0  ext4    defaults                                                        voldmanaged=int_sdcard:27,nonremovable
+/devices/platform/msm_hsusb_host/usb2             /storage/usbdisk  auto    defaults                                                        voldmanaged=usbdisk:auto

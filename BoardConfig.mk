@@ -172,3 +172,7 @@ BOARD_SEPOLICY_UNION := \
        ueventd.te \
        wpa.te
 
+USE_DEVICE_SPECIFIC_CAMERA:= true
+USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY:= true
+
+HAVE_ADRENO_SOURCE:= false

@@ -50,4 +50,13 @@
             <extra android:name="autoStart" android:value="true" />
         </intent>
     </PreferenceScreen>
+
+    <PreferenceScreen
+        android:key="carrier_settings_key"
+        android:title="@string/carrier_settings_title">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="@string/carrier_settings"
+                android:targetClass="@string/carrier_settings_menu" />
+    </PreferenceScreen>
+
 </PreferenceScreen>
