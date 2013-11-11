@@ -1,0 +1,5 @@
+allow healthd rootfs:file { read entrypoint };
+
+# Workaround for 0x10 / block_suspend capability2 denials.
+# Requires a kernel patch to fix properly.
+allow healthd self:capability2 block_suspend;

@@ -163,6 +163,7 @@ BOARD_SEPOLICY_UNION := \
        file.te \
        file_contexts \
        hci_init.te \
+       healthd.te \
        init_shell.te \
        keystore.te \
        mediaserver.te \
