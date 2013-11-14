@@ -190,7 +190,8 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8960 \
     gralloc.msm8960 \
     copybit.msm8960 \
-    memtrack.msm8960
+    memtrack.msm8960 \
+    libemoji
 
 # Audio
 PRODUCT_PACKAGES += \
