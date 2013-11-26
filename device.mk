@@ -237,6 +237,8 @@ PRODUCT_PACKAGES += \
     FM2 \
     FMRecord
 
+PRODUCT_BOOT_JARS += qcom.fmradio
+
 # transmitter isn't supported
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.fm.transmitter=false
