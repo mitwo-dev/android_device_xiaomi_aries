@@ -130,12 +130,28 @@ case "$target" in
          echo 384000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
          chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
          chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+         chown system.system /sys/devices/system/cpu/cpu0/cpufreq/thermal_cap_freq
+         chown system.system /sys/devices/system/cpu/cpu0/cpufreq/sys_cap_freq
          chown system /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
          chown system /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+         chown system.system /sys/devices/system/cpu/cpu1/cpufreq/thermal_cap_freq
+         chown system.system /sys/devices/system/cpu/cpu1/cpufreq/sys_cap_freq
          chown system /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
          chown system /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
+         chown system.system /sys/devices/system/cpu/cpu2/cpufreq/thermal_cap_freq
+         chown system.system /sys/devices/system/cpu/cpu2/cpufreq/sys_cap_freq
          chown system /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
          chown system /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
+         chown system.system /sys/devices/system/cpu/cpu3/cpufreq/thermal_cap_freq
+         chown system.system /sys/devices/system/cpu/cpu3/cpufreq/sys_cap_freq
+         echo 1728000 > /sys/devices/system/cpu/cpu0/cpufreq/thermal_cap_freq
+	 echo 1728000 > /sys/devices/system/cpu/cpu0/cpufreq/sys_cap_freq
+         echo 1728000 > /sys/devices/system/cpu/cpu1/cpufreq/thermal_cap_freq
+         echo 1728000 > /sys/devices/system/cpu/cpu1/cpufreq/sys_cap_freq
+         echo 1728000 > /sys/devices/system/cpu/cpu2/cpufreq/thermal_cap_freq
+         echo 1728000 > /sys/devices/system/cpu/cpu2/cpufreq/sys_cap_freq
+         echo 1728000 > /sys/devices/system/cpu/cpu3/cpufreq/thermal_cap_freq
+         echo 1728000 > /sys/devices/system/cpu/cpu3/cpufreq/sys_cap_freq
          chown root.system /sys/devices/system/cpu/mfreq
          chmod 220 /sys/devices/system/cpu/mfreq
          chown root.system /sys/devices/system/cpu/cpu1/online
@@ -225,9 +241,9 @@ esac
 
 # Post-setup services
 case "$target" in
-    "msm8660" | "msm8960")
-        start mpdecision
-    ;;
+#    "msm8660" | "msm8960")
+#        start mpdecision
+#    ;;
     "msm7627a")
         soc_id=`cat /sys/devices/system/soc/soc0/id`
         case "$soc_id" in
