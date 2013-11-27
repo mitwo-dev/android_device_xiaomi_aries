@@ -251,6 +251,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     telephony.lteOnCdmaDevice=0 \
     ril.subscription.types=NV,RUIM \
     ro.cdma.home.operator.numeric=46003 \
+    ro.telephony.default_cdma_sub=0 \
     persist.omh.enabled=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
