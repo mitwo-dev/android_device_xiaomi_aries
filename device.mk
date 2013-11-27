@@ -145,7 +145,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.vr.enable=false \
     persist.audio.handset.mic=digital \
     af.resampler.quality=255 \
-    qcom.hw.aac.encoder=true
+    qcom.hw.aac.encoder=true \
+    lpa.decode=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.aries.power_profile=middle
