@@ -824,9 +824,11 @@ service ramdump_dsps2 /system/bin/logwrapper /system/bin/ramdump dsps2 /dev/ramd
    user system
    group system media_rw
 
-service kickstart /system/bin/qcks -i /firmware/image/
+service kickstart /system/bin/qcks -i /firmware/image/ -r /data/tombstones/mdm/
+    class core
+    user system
+    group system
     oneshot
-    disabled
 
 service mdm_helper /system/bin/mdm_helper
     class main
