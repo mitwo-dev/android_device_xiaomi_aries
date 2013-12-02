@@ -4,7 +4,7 @@
 #define PRESET_BASE 0x80310000
 #define ES310_PRESET_HANDSET_INCALL_NB		    (PRESET_BASE)
 #define ES310_PRESET_HEADSET_INCALL_NB 	           (PRESET_BASE + 1)
-#define ES310_PRESET_HANDSFREE_REC_NB		    (PRESET_BASE + 2)
+#define ES310_PRESET_HANDSET_INCALL_NB_1MIC		    (PRESET_BASE + 2)
 #define ES310_PRESET_HANDSFREE_INCALL_NB		    (PRESET_BASE + 3)
 #define ES310_PRESET_HANDSET_INCALL_WB	           (PRESET_BASE + 4)
 #define ES310_PRESET_HEADSET_INCALL_WB		    (PRESET_BASE + 5)
@@ -15,7 +15,7 @@
 #define ES310_PRESET_HANDSFREE_REC_WB                 (PRESET_BASE + 10)
 #define ES310_PRESET_HANDSFREE_VOIP_WB               (PRESET_BASE + 11)
 #define ES310_PRESET_VOICE_RECOGNIZTION_WB       (PRESET_BASE + 12)
-#define ES310_PRESET_HEADSET_REC_WB                     (PRESET_BASE + 13)
+#define ES310_PRESET_HANDSET_INCALL_VOIP_WB_1MIC                     (PRESET_BASE + 13)
 #define ES310_PRESET_ANALOG_BYPASS	                   (PRESET_BASE + 14)
 #define ES310_PRESET_HEADSET_MIC_ANALOG_BYPASS    (PRESET_BASE + 15)
 
@@ -49,15 +49,5 @@ struct ES310_config_data {
 	unsigned char *data;
 };
 
-#ifdef __KERNEL__
-struct es310_platform_data {
-	uint32_t gpio_es310_reset;
-	uint32_t gpio_es310_clk;
-	uint32_t gpio_es310_wakeup;
-	uint32_t gpio_es310_mic_switch;
-	int (*power_on) (int on);
-	const char* fw_name;
-};
-#endif
 
 #endif
