@@ -26,9 +26,7 @@
     <bool name="config_hspa_data_distinguishable">true</bool>
 
     <!-- Vibration duration for MultiWaveView used in SearchPanelView -->
-    <integer translatable="true" name="config_search_panel_view_vibration_duration">10</integer>
+    <integer translatable="false" name="config_search_panel_view_vibration_duration">7</integer>
 
-    <!-- Should "4G" be shown instead of "LTE" when the network is NETWORK_TYPE_LTE? -->
-    <bool name="config_show4GForLTE">false</bool>
 </resources>
 
