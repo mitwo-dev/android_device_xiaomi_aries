@@ -243,4 +243,6 @@
 
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
 
+    <bool name="config_cellBroadcastAppLinks">true</bool>
+
 </resources>
