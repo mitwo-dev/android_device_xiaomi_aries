@@ -45,7 +45,8 @@ PRODUCT_COPY_FILES += \
 
 # Xiaomi App Store
 PRODUCT_COPY_FILES += \
-    device/xiaomi/aries/libpatcher_jni.so:system/lib/libpatcher_jni.so
+    device/xiaomi/aries/libpatcher_jni.so:system/lib/libpatcher_jni.so \
+    device/xiaomi/aries/libsdk_patcher_jni.so:system/lib/libsdk_patcher_jni.so
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
