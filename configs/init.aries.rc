@@ -385,6 +385,9 @@ on post-fs-data
     chown system system /data/qcks/efs3.bin
     chown system system /data/qcks/temp.dump
 
+    # Enable Power save functionality for modem
+    setprop persist.radio.add_power_save 1
+
     # communicate with mpdecision
     mkdir /dev/socket/mpdecision 0770 system system
     chmod 2770 /dev/socket/mpdecision
