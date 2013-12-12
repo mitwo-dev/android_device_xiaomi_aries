@@ -262,6 +262,16 @@ on boot
     chmod 0660 /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
     chown system system /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
     chmod 0660 /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
+    chown system system /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core
+    chown system system /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq
+    chown system system /sys/devices/system/cpu/cpufreq/ondemand/sync_freq
+    chown system system /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load
+    chown system system /sys/devices/system/cpu/cpufreq/ondemand/input_boost
+    chown 0660 /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core
+    chown 0660 /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq
+    chown 0660 /sys/devices/system/cpu/cpufreq/ondemand/sync_freq
+    chown 0660 /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load
+    chown 0660 /sys/devices/system/cpu/cpufreq/ondemand/input_boost
 
     # Assume SMP uses shared cpufreq policy for all CPUs
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -279,8 +289,32 @@ on boot
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
+    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown system /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+    chown system /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+    chown system /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+    chown system /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
+    chown system /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
+    chown system /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
+
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/thermal_cap_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/sys_cap_freq
+
+    chown system system /sys/devices/system/cpu/cpu1/cpufreq/thermal_cap_freq
+    chown system.system /sys/devices/system/cpu/cpu1/cpufreq/sys_cap_freq
+
+    chown system system /sys/devices/system/cpu/cpu2/cpufreq/thermal_cap_freq
+    chown system system /sys/devices/system/cpu/cpu2/cpufreq/sys_cap_freq
+
+    chown system system /sys/devices/system/cpu/cpu3/cpufreq/thermal_cap_freq
+    chown system system /sys/devices/system/cpu/cpu3/cpufreq/sys_cap_freq
+
     chown system system /dev/cpuctl/apps/cpu.notify_on_migrate
     chmod 0644 /dev/cpuctl/apps/cpu.notify_on_migrate
+
+    chown root system /sys/devices/system/cpu/mfreq
+    chmod 220 /sys/devices/system/cpu/mfreq
 
     start qcamerasvr
 
@@ -404,7 +438,7 @@ on post-fs-data
     write /sys/module/rpm_resources/enable_low_power/pxo 1
     write /sys/module/rpm_resources/enable_low_power/vdd_dig 1
     write /sys/module/rpm_resources/enable_low_power/vdd_mem 1
-    write /sys/module/pm_8x60/modes/cpu0/retention/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu0/retention/idle_enabled 0
     write /sys/module/pm_8x60/modes/cpu1/retention/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu2/retention/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu3/retention/idle_enabled 1
@@ -412,6 +446,14 @@ on post-fs-data
     write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu2/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu3/power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu2/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu3/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu2/standalone_power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu3/standalone_power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "ondemand"
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "ondemand"
@@ -421,10 +463,27 @@ on post-fs-data
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
     write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
+    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential 10
+    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core 60
+    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential_multi_core 3
+    write /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq 918000
+    write /sys/devices/system/cpu/cpufreq/ondemand/sync_freq 1026000
+    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load 80
+
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 384000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 384000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 384000
+    write /dev/cpuctl/apps/cpu.notify_on_migrate 1
+
+    write /sys/devices/system/cpu/cpu0/cpufreq/thermal_cap_freq 1728000
+    write /sys/devices/system/cpu/cpu0/cpufreq/sys_cap_freq 1728000
+    write /sys/devices/system/cpu/cpu1/cpufreq/thermal_cap_freq 1728000
+    write /sys/devices/system/cpu/cpu1/cpufreq/sys_cap_freq 1728000
+    write /sys/devices/system/cpu/cpu2/cpufreq/thermal_cap_freq 1728000
+    write /sys/devices/system/cpu/cpu2/cpufreq/sys_cap_freq 1728000
+    write /sys/devices/system/cpu/cpu3/cpufreq/thermal_cap_freq 1728000
+    write /sys/devices/system/cpu/cpu3/cpufreq/sys_cap_freq 1728000
 
 on charger
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system wait ro barrier=1
@@ -652,25 +711,10 @@ on property:drmdiag.load=1
 on property:drmdiag.load=0
     stop drmdiag
 
-service qcom-post-fs /system/bin/sh /system/etc/init.qcom.post_fs.sh
-    class core
-    user root
-    disabled
-    oneshot
-
 service qcom-sh /system/bin/sh /init.qcom.sh
     class late_start
     user root
     oneshot
-
-service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-
-on property:sys.boot_completed=1
-    start qcom-post-boot
 
 service hdmid /system/bin/hdmid
     class late_start
@@ -699,14 +743,6 @@ service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
 on property:persist.data.ds_fmc_app.mode=1
     start ds_fmc_appd
 
-service ims_regmanager /system/bin/exe-ims-regmanagerprocessnative
-    class late_start
-    group qcom_oncrpc net_bt_admin inet radio wifi
-    disabled
-
-on property:persist.ims.regmanager.mode=1
-    start ims_regmanager
-
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  1
@@ -730,30 +766,6 @@ service sysmatsir /system/bin/smonsir
 on property:persist.sysmatsir.enable=1
     start sysmatsir
 
-service battery_monitor /system/bin/battery_monitor
-    user system
-    group system
-    disabled
-
-service ril-daemon1 /system/bin/rild -c 1
-    class main
-    socket rild1 stream 660 root radio
-    socket rild-debug1 stream 660 radio system
-    user root
-    disabled
-    group radio cache inet misc audio sdcard_r sdcard_rw qcom_oncrpc diag qcom_diag log
-
-service profiler_daemon /system/bin/profiler_daemon
-    class late_start
-    user root
-    group root
-    disabled
-
-service hcidump /system/bin/sh /system/etc/hcidump.sh
-    user bluetooth
-    group bluetooth system net_bt_admin net_admin
-    disabled
-    oneshot
 
 service charger /sbin/chargeonlymode
     class charger
@@ -764,35 +776,6 @@ on property:service.adb.root=1
     restart adbd
     write /sys/class/android_usb/android0/enable 1
 
-service diag_mdlog /system/bin/diag_mdlog
-    user root
-    group root
-    oneshot
-    disabled
-
-on property:diag_mdlog.enable=true
-    start diag_mdlog
-
-on property:diag_mdlog.enable=false
-    stop diag_mdlog
-
-service diagmodem /system/bin/diag_mdlog -f /etc/Diag.cfg -o /sdcard/diag_logs/diagmodem -s 2 -m 3
-    user root
-    group root
-    oneshot
-    disabled
-
-on property:diagmodem.enable=true
-    start diagmodem
-
-on property:diagmodem.enable=false
-    stop diagmodem
-
-on property:persist.radio.ramdump_sdcard=1
-    write /sys/module/subsystem_restart/parameters/enable_modem_ramdumps 1
-
-on property:persist.radio.ramdump_sdcard=0
-    write /sys/module/subsystem_restart/parameters/enable_modem_ramdumps 0
 
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
@@ -815,31 +798,11 @@ service thermald /system/bin/thermald -c /system/etc/thermald.conf
 service mpdecision /system/bin/mpdecision --avg_comp
     class main
 
-service ramdump_riva /system/bin/logwrapper /system/bin/ramdump riva /dev/ramdump_riva /storage_int/ramdump/riva_ramdump.bin
-   class late_start
-   user system
-   group system media_rw
-
-service ramdump_dsps /system/bin/logwrapper /system/bin/ramdump dsps /dev/ramdump_dsps /storage_int/ramdump/dsps_ramdump.bin
-   class late_start
-   user system
-   group system media_rw
-
-service ramdump_dsps2 /system/bin/logwrapper /system/bin/ramdump dsps2 /dev/ramdump_smem-dsps /storage_int/ramdump/dsps2_ramdump.bin
-   class late_start
-   user system
-   group system media_rw
-
 service kickstart /system/bin/qcks -i /firmware/image/ -r /data/tombstones/mdm/
     class core
     user system
     group system radio
     oneshot
-
-service mdm_helper /system/bin/mdm_helper
-    class main
-    onrestart setprop ro.service.mdm_helper_restarted "true"
-    disabled
 
 service qrngd /system/bin/qrngd -f
    class main
@@ -856,17 +819,12 @@ on property:ro.baseband=mdm
     mkdir /data/qcks 0770 system system
     start kickstart
 
-# Start up mdm_helper if sglte detected
-on property:ro.baseband=sglte
-    mkdir /data/misc/mdmhelperdata 0700
-    start mdm_helper
-
 on property:persist.sys.aries.power_profile=high
-#    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 0
-    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 85
-    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 0
-    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
-    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 80000
+##    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 0
+#    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 85
+#    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 0
+#    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
+#    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 80000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2000000
     write /sys/class/leds/lcd-backlight/max_brightness 255
     write /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/max_gpuclk 400000000
@@ -881,11 +839,11 @@ on property:persist.sys.aries.power_profile=high
     start thermald
 
 on property:persist.sys.aries.power_profile=middle
-#    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 100000
-    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 95
-    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 350000
-    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
-    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
+##    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 100000
+#    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 95
+#    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 350000
+#    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
+#    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2000000
     write /sys/class/leds/lcd-backlight/max_brightness 255
     write /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/max_gpuclk 400000000
@@ -894,11 +852,11 @@ on property:persist.sys.aries.power_profile=middle
     start thermald
 
 on property:persist.sys.aries.power_profile=low
-#    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 100000
-    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 95
-    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 350000
-    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
-    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 20000
+##    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 100000
+#    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 95
+#    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 350000
+#    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
+#    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 20000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 918000
     write /sys/class/leds/lcd-backlight/max_brightness 70
     write /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/max_gpuclk 200000000

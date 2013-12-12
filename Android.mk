@@ -44,22 +44,6 @@ LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/wifi
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE       := voiceproc_init.img
-LOCAL_MODULE_TAGS  := optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := voiceproc_init.img
-LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/firmware
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := voiceproc.img
-LOCAL_MODULE_TAGS  := optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := voiceproc.img
-LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/firmware
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
 LOCAL_MODULE       := MiMarket.apk
 LOCAL_MODULE_TAGS  := optional
 LOCAL_SRC_FILES    := MiMarket.apk

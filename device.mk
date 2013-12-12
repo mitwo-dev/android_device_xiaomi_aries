@@ -83,10 +83,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
-    device/xiaomi/aries/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
-    device/xiaomi/aries/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
-    device/xiaomi/aries/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
-    device/xiaomi/aries/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh
+    device/xiaomi/aries/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/bootanimation.zip:system/media/bootanimation.zip
@@ -301,9 +298,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Dual boot init
 PRODUCT_PACKAGES += \
   dualboot_init
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.selinux=1
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/mount_ext4.sh:system/bin/mount_ext4.sh
