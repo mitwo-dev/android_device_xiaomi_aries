@@ -20,6 +20,9 @@
 # Get the long list of APNs
 PRODUCT_COPY_FILES := device/xiaomi/aries/configs/apns-conf.xml:system/etc/apns-conf.xml
 
+# include additional build utilities
+-include device/xiaomi/aries/utils.mk
+
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
