@@ -163,6 +163,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_PACKAGES += \
     Updater \
+    Stk \
     Launcher3
 
 PRODUCT_PROPERTY_OVERRIDES += \
