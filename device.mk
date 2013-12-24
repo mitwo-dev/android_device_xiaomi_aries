@@ -66,7 +66,8 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/audio_effects.conf:system/etc/audio_effects.conf
 
 PRODUCT_COPY_FILES += \
-    device/xiaomi/aries/thermald-aries.conf:system/etc/thermald.conf
+    device/xiaomi/aries/thermald_h.conf:system/etc/thermald_h.conf \
+    device/xiaomi/aries/thermald_l.conf:system/etc/thermald_l.conf
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/configs/init.aries.rc:root/init.aries.rc \

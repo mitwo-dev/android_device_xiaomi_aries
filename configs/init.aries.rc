@@ -455,20 +455,20 @@ on post-fs-data
     write /sys/module/pm_8x60/modes/cpu2/standalone_power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu3/standalone_power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
-    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
-    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential 10
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core 60
-    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential_multi_core 3
-    write /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq 918000
-    write /sys/devices/system/cpu/cpufreq/ondemand/sync_freq 1026000
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load 80
+#    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "ondemand"
+#    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "ondemand"
+#    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "ondemand"
+#    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "ondemand"
+#    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
+#    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
+#    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
+#    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
+#    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential 10
+#    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_multi_core 60
+#    write /sys/devices/system/cpu/cpufreq/ondemand/down_differential_multi_core 3
+#    write /sys/devices/system/cpu/cpufreq/ondemand/optimal_freq 918000
+#    write /sys/devices/system/cpu/cpufreq/ondemand/sync_freq 1026000
+#    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load 80
 
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 384000
@@ -790,10 +790,15 @@ service gsiff_daemon /system/bin/gsiff_daemon
     user system
     group gps qcom_oncrpc net_raw
 
-service thermald /system/bin/thermald -c /system/etc/thermald.conf
-     class main
-    socket thermald stream 0666 root root
-    user root
+service thermald_h /system/bin/thermald --config /system/etc/thermald_h.conf
+   class main
+   user root
+   group root
+
+service thermald_l /system/bin/thermald --config /system/etc/thermald_l.conf
+   class main
+   user root
+   group root
 
 service mpdecision /system/bin/mpdecision --avg_comp
     class main
@@ -820,11 +825,11 @@ on property:ro.baseband=mdm
     start kickstart
 
 on property:persist.sys.aries.power_profile=high
-##    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 0
-#    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 85
-#    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 0
-#    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
-#    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 80000
+#    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 0
+    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 85
+    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 0
+    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 80000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2000000
     write /sys/class/leds/lcd-backlight/max_brightness 255
     write /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/max_gpuclk 400000000
@@ -835,34 +840,37 @@ on property:persist.sys.aries.power_profile=high
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 2000000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 2000000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 2000000
-    stop thermald
-    start thermald
+    stop thermald_h
+    stop thermald_l
+    start thermald_h
 
 on property:persist.sys.aries.power_profile=middle
-##    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 100000
-#    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 95
-#    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 350000
-#    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
-#    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
+#    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 100000
+    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 95
+    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 350000
+    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2000000
     write /sys/class/leds/lcd-backlight/max_brightness 255
     write /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/max_gpuclk 400000000
     start mpdecision
-    stop thermald
-    start thermald
+    stop thermald_h
+    stop thermald_l
+    start thermald_l
 
 on property:persist.sys.aries.power_profile=low
-##    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 100000
-#    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 95
-#    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 350000
-#    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
-#    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 20000
+#    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 100000
+    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 95
+    write /sys/devices/system/cpu/cpufreq/interactive/max_boost 350000
+    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 20000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 918000
     write /sys/class/leds/lcd-backlight/max_brightness 70
     write /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/max_gpuclk 200000000
     start mpdecision
-    stop thermald
-    start thermald
+    stop thermald_h
+    stop thermald_l
+    start thermald_l
 
 on property:persist.sys.display_prefer=0
     write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 2
