@@ -35,13 +35,15 @@ PRODUCT_RESTRICT_VENDOR_FILES := false
 
 PRODUCT_PACKAGES += wpa_supplicant_overlay.conf
 PRODUCT_PACKAGES += p2p_supplicant_overlay.conf
-PRODUCT_PACKAGES += MiMarket.apk
 
 # GMS
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase=android-xiaomi
 
 $(call inherit-product-if-exists, vendor/google/products/gms_aosp.mk)
+
+# prebuild apps
+$(call inherit-product-if-exists, vendor/prebuild_apps/prebuild.mk)
 
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/xiaomi/aries/device.mk)

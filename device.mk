@@ -43,11 +43,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/libril.so:system/lib/libril.so
 
-# Xiaomi App Store
-PRODUCT_COPY_FILES += \
-    device/xiaomi/aries/libpatcher_jni.so:system/lib/libpatcher_jni.so \
-    device/xiaomi/aries/libsdk_patcher_jni.so:system/lib/libsdk_patcher_jni.so
-
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     device/xiaomi/aries/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \

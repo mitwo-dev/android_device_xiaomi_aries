@@ -43,14 +43,6 @@ LOCAL_SRC_FILES    := p2p_supplicant_overlay.conf
 LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/wifi
 include $(BUILD_PREBUILT)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE       := MiMarket.apk
-LOCAL_MODULE_TAGS  := optional
-LOCAL_SRC_FILES    := MiMarket.apk
-LOCAL_MODULE_CLASS := JAVA_LIBRARIES
-LOCAL_MODULE_PATH  := $(TARGET_OUT)/app
-include $(BUILD_PREBUILT)
-
 endif
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
