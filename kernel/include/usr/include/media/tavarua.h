@@ -1,12 +1,7 @@
 #ifndef __LINUX_TAVARUA_H
 #define __LINUX_TAVARUA_H
 
-#ifdef __KERNEL__
-#include <linux/types.h>
-#include <asm/sizes.h>
-#else
 #include <stdint.h>
-#endif
 #include <linux/ioctl.h>
 #include <linux/videodev2.h>
 
@@ -559,13 +554,13 @@ enum {
 struct fm_spur_data {
 	int freq[MAX_SPUR_FREQ_LIMIT];
 	__s8 rmssi[MAX_SPUR_FREQ_LIMIT];
-} __packed;
+} __attribute__((packed));
 
 struct fm_def_data_wr_req {
 	__u8    mode;
 	__u8    length;
 	__u8   data[XFR_REG_NUM];
-} __packed;
+} __attribute__((packed));
 
 enum Internal_tone_gen_vals {
 	ONE_KHZ_LR_EQUA_0DBFS = 1,
