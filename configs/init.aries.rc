@@ -316,6 +316,11 @@ on boot
     chown root system /sys/devices/system/cpu/mfreq
     chmod 220 /sys/devices/system/cpu/mfreq
 
+    #fastrpc permission setting
+    insmod /system/lib/modules/adsprpc.ko
+    chown system.system /dev/adsprpc-smd
+    chmod 666 /dev/adsprpc-smd
+
     start qcamerasvr
 
 # import cne init file
