@@ -133,6 +133,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320
 
+# qcom
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qc.sdk.audio.ssr=false \
+    ro.qc.sdk.audio.fluencetype=fluence \
+    ro.qc.sdk.sensors.gestures=false
+
 # Audio Configuration
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.mode=endfire \
@@ -140,7 +146,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.handset.mic=digital \
     af.resampler.quality=255 \
     qcom.hw.aac.encoder=true \
-    lpa.decode=false
+    lpa.decode=true \
+    tunnel.decode=false \
+    tunnel.audiovideo.decode=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.aries.power_profile=middle
