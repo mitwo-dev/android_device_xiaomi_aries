@@ -204,11 +204,6 @@
 
     <bool name="config_ui_enableFadingMarquee">false</bool>
 
-    <string-array name="config_usbHostBlacklist">
-        <!--  /dev/bus/usb/001 is used for the modem -->
-        <item>/dev/bus/usb/001</item>
-    </string-array>
-
     <bool name="config_enableWifiDisplay">true</bool>
 
     <!-- Minimum span needed to begin a touch scaling gesture.
