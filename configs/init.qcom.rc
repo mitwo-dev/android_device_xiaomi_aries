@@ -25,7 +25,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import init.aries.usb.rc
+import init.qcom.usb.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -54,8 +54,8 @@ on init
     mkdir /persist 0771 system system
 
 on fs
-    exec /sbin/dualboot_init ./fstab.aries
-    mount_all ./fstab.aries.patched
+    exec /sbin/dualboot_init ./fstab.qcom
+    mount_all ./fstab.qcom.patched
     mkdir /persist/property
     chmod 0775 /persist/property
 

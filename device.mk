@@ -65,11 +65,11 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/aries/thermald_l.conf:system/etc/thermald_l.conf
 
 PRODUCT_COPY_FILES += \
-    device/xiaomi/aries/configs/init.aries.rc:root/init.aries.rc \
-    device/xiaomi/aries/configs/init.aries.usb.rc:root/init.aries.usb.rc \
-    device/xiaomi/aries/configs/init.recovery.aries.rc:root/init.recovery.aries.rc \
-    device/xiaomi/aries/configs/fstab.aries:root/fstab.aries \
-    device/xiaomi/aries/configs/ueventd.aries.rc:root/ueventd.aries.rc \
+    device/xiaomi/aries/configs/init.qcom.rc:root/init.qcom.rc \
+    device/xiaomi/aries/configs/init.qcom.usb.rc:root/init.qcom.usb.rc \
+    device/xiaomi/aries/configs/init.recovery.qcom.rc:root/init.recovery.qcom.rc \
+    device/xiaomi/aries/configs/fstab.qcom:root/fstab.qcom \
+    device/xiaomi/aries/configs/ueventd.qcom.rc:root/ueventd.qcom.rc \
     device/xiaomi/aries/configs/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
     device/xiaomi/aries/configs/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
     device/xiaomi/aries/configs/media_profiles.xml:system/etc/media_profiles.xml \

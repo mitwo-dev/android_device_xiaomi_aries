@@ -50,7 +50,7 @@ TARGET_KRAIT_BIONIC_PLDSIZE          := 64
 
 BOARD_KERNEL_BASE      := 0x80200000
 BOARD_KERNEL_PAGESIZE  := 2048
-BOARD_KERNEL_CMDLINE   := console=ttyHSL0,115200,n8 androidboot.hardware=aries ehci-hcd.park=3 maxcpus=2
+BOARD_KERNEL_CMDLINE   := console=null androidboot.hardware=qcom ehci-hcd.park=3 maxcpus=2 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS   := --ramdisk_offset 0x02000000
 
 ifneq ($(BUILD_KERNEL),true)
@@ -127,7 +127,7 @@ ENABLE_WEBGL            := true
 TARGET_FORCE_CPU_UPLOAD := true
 
 # Recovery
-TARGET_RECOVERY_FSTAB            := device/xiaomi/aries/configs/fstab.aries
+TARGET_RECOVERY_FSTAB            := device/xiaomi/aries/configs/fstab.qcom
 RECOVERY_FSTAB_VERSION           := 2
 TARGET_RECOVERY_PIXEL_FORMAT     := "RGBX_8888"
 BOARD_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/graphics_en.c
