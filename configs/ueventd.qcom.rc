@@ -136,6 +136,9 @@
 /dev/ks_hsic_bridge       0660   system     system
 /dev/efs_hsic_bridge      0660   system     system
 
+# wlan
+/dev/wcnss_wlan           0660   system     system
+
 /sys/devices/system/cpu/cpufreq ondemand/boostfreq   0664    system  system
 /sys/devices/system/cpu/cpufreq ondemand/boostpulse  0664    system  system
 /sys/devices/system/cpu/cpufreq ondemand/boosttime   0664    system  system
