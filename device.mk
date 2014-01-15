@@ -79,7 +79,8 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
-    device/xiaomi/aries/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
+    device/xiaomi/aries/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
+    device/xiaomi/aries/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh
 
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/bootanimation.zip:system/media/bootanimation.zip

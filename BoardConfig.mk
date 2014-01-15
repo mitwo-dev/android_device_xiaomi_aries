@@ -38,6 +38,7 @@ TARGET_CPU_SMP             := true
 TARGET_CPU_VARIANT         := krait
 TARGET_ARCH                := arm
 TARGET_ARCH_VARIANT        := armv7-a-neon
+ARCH_ARM_HAVE_TLS_REGISTER := true
 BOARD_USES_QCOM_HARDWARE   := true
 
 # Krait optimizations
