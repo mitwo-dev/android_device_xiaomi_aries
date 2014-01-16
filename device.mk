@@ -144,6 +144,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.mode=endfire \
     persist.audio.vr.enable=false \
     persist.audio.handset.mic=digital \
+    persist.audio.vns.mode=2 \
     af.resampler.quality=255 \
     qcom.hw.aac.encoder=true \
     lpa.decode=true \
