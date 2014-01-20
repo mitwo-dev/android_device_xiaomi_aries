@@ -52,7 +52,8 @@ ifneq ($(BUILD_KERNEL),true)
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/kernel/exfat.ko:system/lib/modules/exfat.ko \
     device/xiaomi/aries/kernel/radio-iris-transport.ko:system/lib/modules/radio-iris-transport.ko \
-    device/xiaomi/aries/kernel/wlan.ko:system/lib/modules/wlan.ko
+    device/xiaomi/aries/kernel/wlan.ko:system/lib/modules/wlan.ko \
+    device/xiaomi/aries/kernel/adsprpc.ko:system/lib/modules/adsprpc.ko
 endif
 
 PRODUCT_COPY_FILES += \
