@@ -94,9 +94,6 @@ TARGET_USES_ION             := true
 USE_OPENGL_RENDERER         := true
 TARGET_USES_C2D_COMPOSITION := true
 
-# Use retire fence from MDP driver
-TARGET_DISPLAY_USE_RETIRE_FENCE := true
-
 # Audio
 BOARD_USES_ALSA_AUDIO                   := true
 TARGET_USES_QCOM_MM_AUDIO               := true
