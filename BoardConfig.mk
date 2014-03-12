@@ -125,7 +125,7 @@ ENABLE_WEBGL            := true
 TARGET_FORCE_CPU_UPLOAD := true
 
 # Recovery
-TARGET_RECOVERY_FSTAB            := device/xiaomi/aries/configs/fstab.qcom
+#TARGET_RECOVERY_FSTAB            := device/xiaomi/aries/configs/fstab.qcom
 RECOVERY_FSTAB_VERSION           := 2
 TARGET_RECOVERY_PIXEL_FORMAT     := "RGBX_8888"
 BOARD_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/graphics_en.c
@@ -141,6 +141,20 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 373293056
 BOARD_PERSISTIMAGE_PARTITION_SIZE  := 8388608
 BOARD_CACHEIMAGE_PARTITION_SIZE    := 402653184
 BOARD_FLASH_BLOCK_SIZE             := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
+
+#Miui Recovery
+RECOVERY_HAVE_SELINUX := true
+TARGET_RECOVERY_INITRC := device/xiaomi/aries/init.rc
+TARGET_RECOVERY_FSTAB := device/xiaomi/aries/recovery.fstab
+MIUI_DEVICE_CONF := ../../../device/xiaomi/aries/device.conf
+MIUI_INIT_CONF := ../../../device/xiaomi/aries/init.conf
+TARGET_NEEDS_VSYNC := true
+RECOVERY_HAS_DUALSYSTEM_PARTITIONS := true
+TW_EXCLUDE_SUPERSU := true
+ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
+#ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
+ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1
+ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=1
 
 BOARD_USES_SECURE_SERVICES := true
 
