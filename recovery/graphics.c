@@ -31,7 +31,7 @@
 
 #include <pixelflinger/pixelflinger.h>
 
-#include "font_16x30_cn.h"
+#include "font_20x36_cn.h"
 #include "chinese.h"
 
 
@@ -265,7 +265,7 @@ static void** font_data;
 #include <sys/time.h>
 
 
-int gr_text(int x, int y, const char *s, int bold)
+int gr_text(int x, int y, const char *s)
 {
     GGLContext *gl = gr_context;
     GRFont *gfont = gr_font;

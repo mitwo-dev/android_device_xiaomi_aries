@@ -28,8 +28,8 @@ on init
     mkdir /external_sd 
     mount /tmp /tmp tmpfs
 
-    chown root shell /tmp
-    chmod 0775 /tmp
+    chown shell shell /tmp
+    chmod 0777 /tmp
 
     mkdir /mnt 0775 root system
     mkdir /storage 0050 root sdcard_r
