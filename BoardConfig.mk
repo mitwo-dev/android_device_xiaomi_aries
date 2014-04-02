@@ -152,7 +152,7 @@ TWHAVE_SELINUX := true
 
 #Miui Recovery
 RECOVERY_HAVE_SELINUX := true
-#TARGET_RECOVERY_INITRC := device/xiaomi/aries/init.rc
+TARGET_RECOVERY_INITRC := device/xiaomi/aries/init.rc
 #TARGET_RECOVERY_FSTAB := device/xiaomi/aries/recovery.fstab
 MIUI_DEVICE_CONF := ../../../device/xiaomi/aries/device.conf
 MIUI_INIT_CONF := ../../../device/xiaomi/aries/init.conf
@@ -181,7 +181,6 @@ BOARD_SEPOLICY_UNION := \
        domain.te \
        drmserver.te \
        file.te \
-       file_contexts \
        hci_init.te \
        healthd.te \
        init_shell.te \
@@ -193,7 +192,9 @@ BOARD_SEPOLICY_UNION := \
        surfaceflinger.te \
        system.te \
        ueventd.te \
-       wpa.te
+       wpa.te 
+      #file_contexts 
+
 
 USE_DEVICE_SPECIFIC_CAMERA:= true
 USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY:= true

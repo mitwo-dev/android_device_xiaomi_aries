@@ -9,7 +9,7 @@
 /dev/block/platform/msm_sdcc.1/by-name/persist      /persist        ext4    nosuid,nodev,barrier=1,data=ordered,nodelalloc                  wait
 /dev/block/platform/msm_sdcc.1/by-name/modem        /firmware       vfat    ro,uid=1000,shortname=lower,gid=1000,dmask=227,fmask=337                        wait
 /dev/block/platform/msm_sdcc.1/by-name/boot         /boot           emmc    defaults                                                        defaults
-/dev/block/platform/msm_sdcc.1/by-name/boo1         /boot           emmc    defaults                                                        defaults
+/dev/block/platform/msm_sdcc.1/by-name/boot1         /boot1           emmc    defaults                                                        defaults
 /dev/block/platform/msm_sdcc.1/by-name/recovery     /recovery       emmc    defaults                                                        defaults
 /dev/block/platform/msm_sdcc.1/by-name/misc         /misc           emmc    defaults                                                        defaults
 /dev/block/platform/msm_sdcc.1/by-name/modem        /radio          emmc    defaults                                                        defaults

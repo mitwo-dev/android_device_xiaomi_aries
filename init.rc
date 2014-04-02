@@ -15,17 +15,16 @@ on init
     symlink /system/etc /etc
 
     mkdir /boot
+    mkdir /boot1 
     mkdir /recovery
-    mkdir /sdcard
-    mkdir /internal_sd
-    mkdir /external_sd
     mkdir /sd-ext
     mkdir /datadata
     mkdir /emmc
     mkdir /system
+    mkdir /system1
     mkdir /data
     mkdir /cache
-    mkdir /external_sd 
+    mkdir /external_sd
     mount /tmp /tmp tmpfs
 
     chown shell shell /tmp
