@@ -127,11 +127,13 @@ ENABLE_WEBGL            := true
 TARGET_FORCE_CPU_UPLOAD := true
 
 # Recovery
-TARGET_RECOVERY_FSTAB            := device/xiaomi/aries/configs/fstab.qcom
+#TARGET_RECOVERY_FSTAB            := device/xiaomi/aries/configs/fstab.qcom
 RECOVERY_FSTAB_VERSION           := 2
 TARGET_RECOVERY_PIXEL_FORMAT     := "RGBX_8888"
 BOARD_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/graphics_en.c
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/xiaomi/aries/recovery/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_UI         :=  ../../device/xiaomi/aries/recovery/dualboot.c \
+	../../device/xiaomi/aries/recovery/recovery_ui.c
 BOARD_USE_CUSTOM_RECOVERY_FONT   := \"roboto_15x24.h\"
 BOARD_HAS_NO_SELECT_BUTTON       := true
 
@@ -143,13 +145,18 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 373293056
 BOARD_PERSISTIMAGE_PARTITION_SIZE  := 8388608
 BOARD_CACHEIMAGE_PARTITION_SIZE    := 402653184
 BOARD_FLASH_BLOCK_SIZE             := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
-
+BOARD_NATIVE_DUALBOOT              := true
+BOARD_NATIVE_DUALBOOT_SINGLEDATA   := true
 ## TWRP 
 DEVICE_RESOLUTION := 720x1280
 TW_EXTERNAL_STORAGE_PATH := "/sdcard"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
 TWHAVE_SELINUX := true
-
+TW_TARGET_USES_QCOM_BSP := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TARGET_RECOVERY_FSTAB := device/xiaomi/aries/configs/twrp.fstab
+# for omnirom_twrp2.7 
+TW_CUSTOM_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/twrp_graphics.c
 #Miui Recovery
 RECOVERY_HAVE_SELINUX := true
 TARGET_RECOVERY_INITRC := device/xiaomi/aries/init.rc
