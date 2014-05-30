@@ -127,10 +127,11 @@ ENABLE_WEBGL            := true
 TARGET_FORCE_CPU_UPLOAD := true
 
 # Recovery
-#TARGET_RECOVERY_FSTAB            := device/xiaomi/aries/configs/fstab.qcom
+TARGET_RECOVERY_FSTAB            := device/xiaomi/aries/configs/fstab.qcom
 RECOVERY_FSTAB_VERSION           := 2
 TARGET_RECOVERY_PIXEL_FORMAT     := "RGBX_8888"
-BOARD_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/graphics_en.c
+# BOARD_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/graphics_en.c #这个是为了编译英文版的Recovery
+BOARD_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/graphics.c      #这个是中文版本的Recovery 
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/xiaomi/aries/recovery/recovery_keys.c
 BOARD_CUSTOM_RECOVERY_UI         :=  ../../device/xiaomi/aries/recovery/dualboot.c \
 	../../device/xiaomi/aries/recovery/recovery_ui.c
@@ -154,9 +155,9 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
 TWHAVE_SELINUX := true
 TW_TARGET_USES_QCOM_BSP := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TARGET_RECOVERY_FSTAB := device/xiaomi/aries/configs/twrp.fstab
+# TARGET_RECOVERY_FSTAB := device/xiaomi/aries/configs/twrp.fstab  #编译TWRP的时候，请打开这个选项
 # for omnirom_twrp2.7 
-TW_CUSTOM_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/twrp_graphics.c
+TW_CUSTOM_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/twrp_graphics.c  #这是英文版本的TWRP 
 #Miui Recovery
 RECOVERY_HAVE_SELINUX := true
 TARGET_RECOVERY_INITRC := device/xiaomi/aries/init.rc
