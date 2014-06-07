@@ -260,7 +260,7 @@ void gr_font_size(int *x, int *y)
     *y = gr_font->cheight;
 }
 
-int gr_text(int x, int y, const char *s, int bold)
+int gr_text(int x, int y, const char *s)
 {
     GGLContext *gl = gr_context;
     GRFont *font = gr_font;
@@ -377,9 +377,13 @@ int gr_init(void)
 
     gr_init_font();
     gr_vt_fd = open("/dev/tty0", O_RDWR | O_SYNC);
+   // gr_vt_fd = open("/dev/ttyHSL1", O_RDWR | O_SYNC);
+    //gr_vt_fd = open("/dev/tty", O_RDWR | O_SYNC);
     if (gr_vt_fd < 0) {
         // This is non-fatal; post-Cupcake kernels don't have tty0.
         perror("can't open /dev/tty0");
+//	perror("Can't open /dev/ttyHSL1");
+	//perror("Can't open /dev/tty");
     } else if (ioctl(gr_vt_fd, KDSETMODE, (void*) KD_GRAPHICS)) {
         // However, if we do open tty0, we expect the ioctl to work.
         perror("failed KDSETMODE to KD_GRAPHICS on tty0");

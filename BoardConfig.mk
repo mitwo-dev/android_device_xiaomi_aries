@@ -54,6 +54,8 @@ BOARD_KERNEL_PAGESIZE  := 2048
 BOARD_KERNEL_CMDLINE   := console=null androidboot.hardware=qcom ehci-hcd.park=3 maxcpus=2 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS   := --ramdisk_offset 0x02000000
 
+BUILD_KERNEL := false
+
 ifneq ($(BUILD_KERNEL),true)
 TARGET_PREBUILT_KERNEL := device/xiaomi/aries/kernel/kernel
 else
@@ -128,8 +130,11 @@ TARGET_FORCE_CPU_UPLOAD := true
 TARGET_RECOVERY_FSTAB            := device/xiaomi/aries/configs/fstab.qcom
 RECOVERY_FSTAB_VERSION           := 2
 TARGET_RECOVERY_PIXEL_FORMAT     := "RGBX_8888"
-BOARD_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/graphics_en.c
+# BOARD_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/graphics_en.c #这个是为了编译英文版的Recovery
+BOARD_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/graphics.c      #这个是中文版本的Recovery 
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/xiaomi/aries/recovery/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_UI         :=  ../../device/xiaomi/aries/recovery/dualboot.c \
+	../../device/xiaomi/aries/recovery/recovery_ui.c
 BOARD_USE_CUSTOM_RECOVERY_FONT   := \"roboto_15x24.h\"
 BOARD_HAS_NO_SELECT_BUTTON       := true
 
@@ -141,6 +146,31 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 373293056
 BOARD_PERSISTIMAGE_PARTITION_SIZE  := 8388608
 BOARD_CACHEIMAGE_PARTITION_SIZE    := 402653184
 BOARD_FLASH_BLOCK_SIZE             := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
+BOARD_NATIVE_DUALBOOT              := true
+BOARD_NATIVE_DUALBOOT_SINGLEDATA   := true
+## TWRP 
+DEVICE_RESOLUTION := 720x1280
+TW_EXTERNAL_STORAGE_PATH := "/sdcard"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+TWHAVE_SELINUX := true
+TW_TARGET_USES_QCOM_BSP := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+# TARGET_RECOVERY_FSTAB := device/xiaomi/aries/configs/twrp.fstab  #编译TWRP的时候，请打开这个选项
+# for omnirom_twrp2.7 
+TW_CUSTOM_CUSTOM_GRAPHICS            := ../../../device/xiaomi/aries/recovery/twrp_graphics.c  #这是英文版本的TWRP 
+#Miui Recovery
+RECOVERY_HAVE_SELINUX := true
+TARGET_RECOVERY_INITRC := device/xiaomi/aries/init.rc
+#TARGET_RECOVERY_FSTAB := device/xiaomi/aries/recovery.fstab
+MIUI_DEVICE_CONF := ../../../device/xiaomi/aries/device.conf
+MIUI_INIT_CONF := ../../../device/xiaomi/aries/init.conf
+TARGET_NEEDS_VSYNC := true
+RECOVERY_HAS_DUALSYSTEM_PARTITIONS := true
+TW_EXCLUDE_SUPERSU := true
+ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
+#ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
+ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1
+ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=1
 
 BOARD_USES_SECURE_SERVICES := true
 
@@ -159,7 +189,6 @@ BOARD_SEPOLICY_UNION := \
        domain.te \
        drmserver.te \
        file.te \
-       file_contexts \
        hci_init.te \
        healthd.te \
        init_shell.te \
@@ -171,7 +200,9 @@ BOARD_SEPOLICY_UNION := \
        surfaceflinger.te \
        system.te \
        ueventd.te \
-       wpa.te
+       wpa.te 
+      #file_contexts 
+
 
 USE_DEVICE_SPECIFIC_CAMERA:= true
 USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY:= true

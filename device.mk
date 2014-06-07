@@ -28,6 +28,11 @@ DEVICE_PACKAGE_OVERLAYS := device/xiaomi/aries/overlay
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
+# Dualboot
+PRODUCT_COPY_FILES += \
+	device/xiaomi/aries/recovery/mount_ext4_default.sh:recovery/root/res/dualboot/mount_ext4_default.sh \
+	device/xiaomi/aries/recovery/mount_ext4_tdb.sh:recovery/root/res/dualboot/mount_ext4_tdb.sh
+
 # Charger
 PRODUCT_COPY_FILES += \
     device/xiaomi/aries/chargeonlymode:root/sbin/chargeonlymode
