@@ -184,6 +184,12 @@ service imsdatadaemon /system/bin/imsdatadaemon
     group ims radio wifi net_raw log qcom_diag net_admin
     disabled
 
+service wcnss-service /system/bin/wcnss_service
+    class main
+    user system
+    group system wifi radio
+    oneshot
+
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
