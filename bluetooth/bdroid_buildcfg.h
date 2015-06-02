@@ -1,4 +1,9 @@
 /*
+ *
+ *  Copyright (c) 2013, The Linux Foundation. All rights reserved.
+ *  Not a Contribution, Apache license notifications and license are retained
+ *  for attribution purposes only.
+ *
  * Copyright (C) 2012 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +21,7 @@
 
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
-
-#define BLUETOOTH_QTI_SW TRUE
-
-#define BTM_DEF_LOCAL_NAME   "Xiaomi MI-2"
-
-#define BTA_DISABLE_DELAY 1000 /* in milliseconds */
+#define BTM_DEF_LOCAL_NAME   "MI 2"
 // Enables Interleave scan
 #define BTA_HOST_INTERLEAVE_SEARCH  TRUE
 // skips conn update at conn completion
