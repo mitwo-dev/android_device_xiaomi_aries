@@ -35,7 +35,5 @@ HAVE_ADRENO_SOURCE := false
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
-PRODUCT_BUILD_GMS := false
-
 -include vendor/xiaomi/aries/BoardConfigVendor.mk
 
