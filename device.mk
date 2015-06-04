@@ -21,7 +21,7 @@
 
 LOCAL_PATH := device/xiaomi/aries
 
-DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # Wi-Fi
 PRODUCT_COPY_FILES += \
