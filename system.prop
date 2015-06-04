@@ -2,5 +2,9 @@
 # system.prop for aries
 #
 
+# RIL
 rild.libpath=/system/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
+
+# LCD
+ro.sf.lcd_density=320
