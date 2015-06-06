@@ -5,6 +5,12 @@
 # RIL
 rild.libpath=/system/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
+ro.cdma.home.operator.numeric=46003
+ro.telephony.default_cdma_sub=0
+persist.omh.enabled=true
 
 # LCD
 ro.sf.lcd_density=320
+
+# Audio
+persist.audio.vns.mode=2

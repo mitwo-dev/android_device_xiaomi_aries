@@ -47,14 +47,5 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
 
-# Audio Configuration
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.audio.vns.mode=2
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cdma.home.operator.numeric=46003 \
-    ro.telephony.default_cdma_sub=0 \
-    persist.omh.enabled=true
-
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
