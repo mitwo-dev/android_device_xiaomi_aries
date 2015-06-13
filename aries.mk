@@ -17,8 +17,10 @@
 # Sample: This is where we'd set a backup provider if we had one
 # $(call inherit-product, device/sample/products/backup_overlay.mk)
 
+ifndef CM_BUILD
 # Get the long list of APNs
 PRODUCT_COPY_FILES := device/xiaomi/msm8960-common/configs/apns-conf.xml:system/etc/apns-conf.xml
+endif
 
 # Inherit from msm8960-common
 $(call inherit-product, device/xiaomi/msm8960-common/common.mk)

@@ -1,4 +1,6 @@
 LOCAL_PATH := $(call my-dir)
+
+ifndef CM_BUILD
 #-------------------------------------
 # linux kernel compile
 # -----------------------------------
@@ -9,5 +11,6 @@ ifeq ($(KERNEL_DEFCONFIG),)
     include $(TARGET_KERNEL_SOURCE)/AndroidKernel.mk
 $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP) $(TARGET_PREBUILT_KERNEL_INCLUDE)
 	$(transform-prebuilt-to-target)
+endif
 endif
 
