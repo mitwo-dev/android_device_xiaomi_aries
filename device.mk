@@ -39,6 +39,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     init.target.rc
 
+# Camera
+PRODUCT_PACKAGES += \
+    camera.msm8960
+
 # Prebuilt kl and kcm keymaps
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/apq8064-tabla-snd-card_Button_Jack.kl:system/usr/keylayout/apq8064-tabla-snd-card_Button_Jack.kl \
