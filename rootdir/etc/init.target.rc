@@ -32,9 +32,12 @@ on early-init
     symlink /data/tombstones /tombstones
     mount debugfs debugfs /sys/kernel/debug
 
-#on init
+on init
        # This is no longer supported from KK release.
        #export BOOTCLASSPATH ${BOOTCLASSPATH}:/system/framework/WfdCommon.jar:/system/framework/qcmediaplayer.jar
+
+    exec /sbin/syspart_select auto
+
 on fs
     mount_all fstab.qcom
 
