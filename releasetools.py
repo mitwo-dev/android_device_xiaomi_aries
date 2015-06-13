@@ -195,3 +195,11 @@ def trunc_to_null(s):
     return s[:s.index('\0')]
   else:
     return s
+
+def FullOTA_PostValidate(info):
+	# run e2fsck
+	info.script.AppendExtra('run_program("/sbin/e2fsck", "-fy", "/dev/block/platform/msm_sdcc.1/by-name/system");');
+	# resize2fs: run
+	info.script.AppendExtra('run_program("/tmp/install/bin/resize2fs_static", "/dev/block/platform/msm_sdcc.1/by-name/system");');
+	# run e2fsck
+	info.script.AppendExtra('run_program("/sbin/e2fsck", "-fy", "/dev/block/platform/msm_sdcc.1/by-name/system");');

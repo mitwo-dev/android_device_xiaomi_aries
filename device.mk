@@ -47,6 +47,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     syspart_select
 
+# for expanding the system partition
+PRODUCT_PACKAGES += \
+    resize2fs_static
+
 # Prebuilt kl and kcm keymaps
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/apq8064-tabla-snd-card_Button_Jack.kl:system/usr/keylayout/apq8064-tabla-snd-card_Button_Jack.kl \
