@@ -32,7 +32,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/voiceproc.img:system/etc/firmware/voiceproc.img
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/ramdisk/init.target.rc:root/init.target.rc
+    $(LOCAL_PATH)/rootdir/ramdisk/init.target.rc:root/init.target.rc \
+    $(LOCAL_PATH)/rootdir/ramdisk/fstab.qcom:root/fstab.qcom
 
 # Prebuilt kl and kcm keymaps
 PRODUCT_COPY_FILES += \
