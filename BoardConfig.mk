@@ -23,6 +23,10 @@ TARGET_BOARD_INFO_FILE       := $(LOCAL_PATH)/board-info.txt
 
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
 
+TARGET_KERNEL_ARCH := arm
+TARGET_KERNEL_SOURCE := kernel/xiaomi/msm8960
+TARGET_KERNEL_CONFIG := aries-perf-user_defconfig
+
 # Audio
 BOARD_HAVE_AUDIENCE_ES310               := true
 
@@ -32,10 +36,10 @@ BOARD_HAVE_CSD_FAST_CALL_SWITCH := true
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 HAVE_ADRENO_SOURCE := false
 
+TARGET_RECOVERY_FSTAB            := $(LOCAL_PATH)/rootdir/ramdisk/fstab.qcom
+
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
-
-PRODUCT_BUILD_GMS := false
 
 -include vendor/xiaomi/aries/BoardConfigVendor.mk
 

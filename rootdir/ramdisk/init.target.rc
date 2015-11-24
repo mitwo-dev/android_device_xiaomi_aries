@@ -30,6 +30,31 @@ on early-init
     symlink /data/tombstones /tombstones
     mount debugfs debugfs /sys/kernel/debug
 
+on init
+    # Set permissions for persist partition
+    mkdir /persist 0771 system system
+
+    export EXTERNAL_STORAGE /sdcard
+
+    # Support legacy paths
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
+
+on fs
+    mount_all ./fstab.qcom
+    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware wait ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
+    restorecon_recursive /persist
+    mkdir /persist/property
+    chmod 0775 /persist/property
+
+    chown system system /dev/ramdump_dsps
+    chown system system /dev/ramdump_lpass
+    chown system system /dev/ramdump_riva
+    chown system system /dev/ramdump_smem-dsps
+    chown system system /dev/ramdump_modem_fw
+    chown system system /dev/ramdump_modem_sw
+    chown system system /dev/ramdump_smem-modem
+
 on boot
    write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
    write /sys/devices/i2c-3/3-005b/update_fw 1
@@ -43,7 +68,6 @@ on post-fs-data
    mkdir /tombstones/dsps 0771 system system
    mkdir /tombstones/mdm 0771 system system
    mkdir /tombstones/mdm2 0771 system system
-
 
 on property:persist.sys.display_prefer=0
     write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 2

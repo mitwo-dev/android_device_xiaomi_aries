@@ -20,8 +20,6 @@
 # Get the long list of APNs
 PRODUCT_COPY_FILES := device/xiaomi/msm8960-common/configs/apns-conf.xml:system/etc/apns-conf.xml
 
-# include additional build utilities
--include device/xiaomi/msm8960-common/utils.mk
 
 # qcom common
 $(call inherit-product, device/xiaomi/msm8960-common/common.mk)
