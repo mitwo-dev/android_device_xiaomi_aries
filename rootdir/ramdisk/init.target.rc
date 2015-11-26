@@ -42,7 +42,6 @@ on init
 
 on fs
     mount_all ./fstab.qcom
-    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware wait ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
     restorecon_recursive /persist
     mkdir /persist/property
     chmod 0775 /persist/property
