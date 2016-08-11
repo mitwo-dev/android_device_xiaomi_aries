@@ -87,6 +87,8 @@ on boot
 
     setprop wifi.interface wlan0
 
+    # chmod 0666 /sys/class/leds/flashlight/brightness
+
     setprop ro.telephony.call_ring.multiple false
 
     #Set SUID bit for usbhub
